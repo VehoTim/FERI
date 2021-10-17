@@ -1,0 +1,8 @@
+100000 elementov
+
+Vstavljanje v glavo seznama: 12062ms
+Vstavljanje na prvo mesto v polje: 1719362ms
+Vstavljanje na konec polja: 126ms
+
+Izracun vsote seznama: 1447ms
+Izracun vsote polja: 198ms

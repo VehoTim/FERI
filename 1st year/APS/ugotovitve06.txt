@@ -1,0 +1,13 @@
+Hitro urejanje je veliko hitrejši urejevalni algoritem od sortiranja s mehurčki, vendar se zelo upočasni ko sortiramo že urejeno polje števil, 
+kar rešimo z mediano, ki jo postavimo na začetek polja, ki ga bomo sortirali.
+
+Ocenjena časovna zahtevnost hitrega urejanja z mediano: O(k*n*log(n))
+Ocenjena časovna zahtevnost hitrega urejanja brez mediane urejenega zaporedja: O(k*n^2)
+Ocenjena časovna zahtevnost urejanja z mehurcki: O(k*n^2)
+
+Pri hitrem urejanju brez mediane 1000000 naraščajočih elementov traja urejanje zelo dolgo časa (200s).
+
+Pri hitrem urejanju brez mediane naraščajočih in padajočih ni večje razlike v času. Sortiranje je podobno le da pri enem vsa stevila da levo od prvega, pri drugem pa na desno.
+
+Če v hitroUredi funkcijo dodamo novo polje podatkov se bo pri vsakem nivoju rekurzije dodalo novo polje podatkov in se aplikacija pri večjem številu podatkov sesuje saj se sklad zapolni.
+Če pa imamo manjše število podatkov se pa v rekurziji naredi manj polj in se sklad še ne zapolni.

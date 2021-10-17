@@ -1,0 +1,18 @@
+IMDB_date_name_mini: 
+ - vstavljanje: 349109microsec / 0.349s
+ - iskanje: 2microsec
+IMDB_date_name_mini_sorted: 
+ - vstavljanje: 454059microsec / 0.454s
+ - iskanje: 8863microsec
+IMDB_date_name_full: 
+ - vstavljanje: 147247081microsec / 147.247s
+ - iskanje: 4microsec
+IMDB_date_name_full_sorted: 
+ - vstavljanje traja vec kot 5min
+
+ Ugotovitve:
+
+ Ne sortirani listi se obdelujejo hitreje v binarno iskanem drevesu kot sortirani, saj se sortirani vsi dodelijo na eno stran drevesa in je tako iskanje po drevesu tezje.
+
+ Ker so vsi povezani le na eni strani dobimo enojno povezan seznam, ki pa je počasnejši od drevesa, po katerem je premikanje ob znani iskani vrednosti hitreje. Drevo je hitreje saj moramo
+ le primerjati iskano vrednost s trenutno (kjer se nahajamo) ter tako ob premikanju navzdol razpolavljamo vrednosti, ki še jih moramo preveriti.
