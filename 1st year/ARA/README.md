@@ -1,1 +1,0 @@
-Aplikacije računalniških algoritmov (applications of computer algorithms)

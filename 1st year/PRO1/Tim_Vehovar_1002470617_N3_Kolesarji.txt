@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+//Izracuna odstotek prevožene poti
+int IzracunOdst(double dolzina, double traj, double hitrost) {
+	double pot = traj * hitrost;
+	int odst = (pot / dolzina) * 100;
+	return odst;
+}
+
+//Izris grafa
+void IzrisGrafa(int st, int graf, int odst) {
+
+	cout << "\nTekmovalec " << st << ": (" << odst << "%)\n";
+
+	for (int j = 0; j < graf; j++)
+	{
+		for (int k = 0; k < 100; k++)
+		{
+			if (k < odst) cout << "*";
+			else cout << ".";
+		}
+		cout << endl;
+	}
+	if (odst > 100) cout << "\nTekmovalec je ze odpeljal dirko.\n";
+}
+
+int main()
+{
+	//Vpis dolzine poti
+	cout << "Vpisi dolzino proge: ";
+	double dol;
+	cin >> dol;
+
+	double hitrost[5];
+	double trajanje[5];
+
+	//Vpis podatkov o tekmovalcih
+	for (int i = 0; i < 5; i++)
+	{
+		int st = i + 1;
+		cout << "\nTekmovalec " << st << ":\n";
+		//Vpis hitrosti
+		cout << "Vpisi hitrost: ";
+		cin >> hitrost[i];
+
+		//Vpis trajanja
+		cout << "Vpisi trajanje: ";
+		cin >> trajanje[i];
+	}
+
+	//Vpraša koliko vrstic naj ima graf
+	cout << "\nKoliko vrstic naj ima graf?";
+	int graf;
+	cin >> graf;
+
+	//Izpis poti
+	for (int i = 0; i < 5; i++)
+	{
+		int odst = IzracunOdst(dol, trajanje[i], hitrost[i]);
+
+		int st = i + 1;
+
+		IzrisGrafa(st, graf, odst);
+	}
+}
