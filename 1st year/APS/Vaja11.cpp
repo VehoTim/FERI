@@ -52,7 +52,6 @@ void napraviSeznam(int** sosedi, int N, int vozlisce, stack<list<pot>> &nivoji, 
 		found = 0;
 		pot prevPot = prev.back();
 		if (!prevPot.mnozica[vozlisce - 1] && vozlisce != prevPot.iz_vozlisca) {
-
 			cur.iz_vozlisca = vozlisce;
 			cur.v_vozlisce = prevPot.iz_vozlisca;
 			cur.cena = sosedi[cur.iz_vozlisca][cur.v_vozlisce] + prevPot.cena;
@@ -83,8 +82,7 @@ list<pot> koncajSeznam(int** sosedi, int N, stack<list<pot>>& nivoji) {
 	bool erased;
 	bool found;
 	while (!prev.empty()) {
-		erased = 0;
-		found = 0;
+		erased = found = 0;
 		pot prevPot = prev.back();
 		cur.iz_vozlisca = 0;
 		cur.v_vozlisce = prevPot.iz_vozlisca;
@@ -207,7 +205,6 @@ int main()
 			f.close();
 			break;
 		case 2:
-
 			start = std::chrono::steady_clock::now();;
 			nivoji = potnik(sosedi, steviloVozlisc);
 			end = std::chrono::steady_clock::now();;
