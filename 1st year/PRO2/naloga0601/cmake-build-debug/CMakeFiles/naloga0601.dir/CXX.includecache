@@ -1,0 +1,48 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Game.cpp
+Game.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Game.h
+iostream
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Game.h
+GameState.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/GameState.h
+GameObject.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/GameObject.h
+Player.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Player.h
+RainDrop.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/RainDrop.h
+Display.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Display.h
+cstdlib
+-
+ctime
+-
+vector
+-
+string
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/GameObject.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/GameState.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Player.h
+GameObject.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/GameObject.h
+string
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/main.cpp
+Game.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0601/Game.h
+

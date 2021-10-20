@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="naloga0902"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="F:/School/PRO II/naloga0902/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="F:/School/PRO II/naloga0902/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="naloga0902">
+				<Option output="F:/School/PRO II/naloga0902/cmake-build-debug/naloga0902.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/School/PRO II/naloga0902/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 naloga0902"/>
+					<CompileFile command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="naloga0902/fast">
+				<Option output="F:/School/PRO II/naloga0902/cmake-build-debug/naloga0902.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="F:/School/PRO II/naloga0902/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="F:/MinGW/mingw32/bin/../lib/gcc/i686-w64-mingw32/8.1.0/../../../../i686-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 naloga0902/fast"/>
+					<CompileFile command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="F:/School/PRO II/naloga0902/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="F:/MinGW/mingw32/bin/mingw32-make.exe -f &quot;F:/School/PRO II/naloga0902/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="F:/School/PRO II/naloga0902/Board.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Board.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Date.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Date.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/DateTime.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/DateTime.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/ExpirationTask.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/ExpirationTask.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Task.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Task.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Time.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/Time.h">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/main.cpp">
+			<Option target="naloga0902"/>
+		</Unit>
+		<Unit filename="F:/School/PRO II/naloga0902/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

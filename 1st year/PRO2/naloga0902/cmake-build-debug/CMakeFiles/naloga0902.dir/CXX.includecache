@@ -1,0 +1,56 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+F:/School/PRO II/naloga0902/Board.h
+string
+-
+vector
+-
+Task.h
+F:/School/PRO II/naloga0902/Task.h
+map
+-
+
+F:/School/PRO II/naloga0902/Date.h
+iostream
+-
+
+F:/School/PRO II/naloga0902/DateTime.h
+Date.h
+F:/School/PRO II/naloga0902/Date.h
+Time.h
+F:/School/PRO II/naloga0902/Time.h
+
+F:/School/PRO II/naloga0902/ExpirationTask.h
+string
+-
+Task.h
+F:/School/PRO II/naloga0902/Task.h
+DateTime.h
+F:/School/PRO II/naloga0902/DateTime.h
+
+F:/School/PRO II/naloga0902/Task.h
+string
+-
+DateTime.h
+F:/School/PRO II/naloga0902/DateTime.h
+vector
+-
+
+F:/School/PRO II/naloga0902/Time.h
+iostream
+-
+
+F:/School/PRO II/naloga0902/main.cpp
+iostream
+-
+Board.h
+F:/School/PRO II/naloga0902/Board.h
+ExpirationTask.h
+F:/School/PRO II/naloga0902/ExpirationTask.h
+

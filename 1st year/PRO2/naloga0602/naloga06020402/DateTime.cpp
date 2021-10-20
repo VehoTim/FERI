@@ -1,0 +1,40 @@
+#include "DateTime.h"
+
+#include <sstream>
+
+DateTime::DateTime(Date date1, Time time1) : date(date1), time(time1) {}
+
+string DateTime::toString() const {
+    stringstream ss;
+    ss << date.toString() << ":" << time.toString();
+    return ss.str();
+}
+
+bool DateTime::isEqual(const DateTime &second) {
+    return (this->toString() == second.toString());
+}
+
+bool DateTime::isAfter(const DateTime &second) {
+    if (this->date.getYear() == second.date.getYear()){
+        if (this->date.getMonth() == second.date.getMonth()){
+            if (this->date.getDay() == second.date.getDay()){
+                if (this->time.getHour() == second.time.getHour()){
+                    if (this->time.getMinute() == second.time.getSecond()){
+                        if (this->time.getSecond() == second.time.getSecond()){
+                            return false;
+                        }
+                        else return this->time.getSecond() > second.time.getSecond();
+                    }
+                    else return this->time.getMinute() > second.time.getMinute();
+                }
+                else return this->time.getHour() > second.time.getHour();
+            }
+            else return this->date.getDay() > second.date.getDay();
+        }
+        else return this->date.getMonth() > second.date.getMonth();
+    }
+    else return this->date.getYear() > second.date.getYear();
+}
+
+bool DateTime::isBefore(const DateTime &second) { return !(this->isAfter(second)); }
+

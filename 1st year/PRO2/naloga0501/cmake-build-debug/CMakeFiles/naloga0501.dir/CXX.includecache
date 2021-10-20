@@ -1,0 +1,52 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Board.h
+string
+-
+vector
+-
+Task.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Task.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Date.h
+iostream
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/DateTime.h
+Date.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Date.h
+Time.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Time.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/ExpirationTask.h
+string
+-
+Task.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Task.h
+DateTime.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/DateTime.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Task.h
+string
+-
+DateTime.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/DateTime.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Time.h
+iostream
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/main.cpp
+iostream
+-
+Board.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/Board.h
+ExpirationTask.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0501/ExpirationTask.h
+

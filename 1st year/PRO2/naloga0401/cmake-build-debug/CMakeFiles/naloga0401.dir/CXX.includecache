@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Athlete.h
+string
+-
+iostream
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Competition.h
+Date.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Date.h
+vector
+-
+Competitor.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Competitor.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Competitor.h
+Athlete.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Athlete.h
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Date.h
+string
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/main.cpp
+iostream
+-
+Competition.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/Competition.h
+time.h
+D:/_RIT_UN/Predmeti/PRO II/naloga0401/time.h
+

@@ -1,0 +1,6 @@
+#ifndef NALOGA0601_GAMESTATE_H
+#define NALOGA0601_GAMESTATE_H
+
+enum class GameState { PLAY, GAME_OVER, PAUSE };
+
+#endif //NALOGA0601_GAMESTATE_H

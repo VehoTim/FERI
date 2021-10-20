@@ -1,0 +1,3 @@
+D:\JetBrains\apps\CLion\ch-0\203.7148.70\bin\cmake\win\bin\cmake.exe -E rm -f CMakeFiles\naloga0301.dir/objects.a
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\ar.exe cr CMakeFiles\naloga0301.dir/objects.a @CMakeFiles\naloga0301.dir\objects1.rsp
+C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\G__~1.EXE -g   -Wl,--whole-archive CMakeFiles\naloga0301.dir/objects.a -Wl,--no-whole-archive  -o naloga0301.exe -Wl,--out-implib,libnaloga0301.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\naloga0301.dir\linklibs.rsp

@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/Date.h
+string
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/Fuel.cpp
+iostream
+-
+sstream
+-
+Fuel.h
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/Fuel.h
+fstream
+-
+algorithm
+-
+UnparseableDateException.h
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/UnparseableDateException.h
+stdarg.h
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/Fuel.h
+Date.h
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/Date.h
+vector
+-
+
+D:/_RIT_UN/Predmeti/PRO II/naloga1201/UnparseableDateException.h
+exception
+-
+string
+-
+
