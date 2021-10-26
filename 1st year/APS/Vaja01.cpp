@@ -141,12 +141,10 @@ int main()
 		cout << "1. Vnos podatka\n";
 		cout << "2. Branje podatka in izpis\n";
 		cout << "3. Izpis vsebine sklada\n";
-
 		cout << "\nKrozna vrsta - izbira:\n";
 		cout << "4. Vnos podatka\n";
 		cout << "5. Branje podatka in izpis\n";
 		cout << "6. Izpis vrste od glave do repa\n";
-
 		cout << "\n7. Konec\n\n";
 
 		cin >> izb;
