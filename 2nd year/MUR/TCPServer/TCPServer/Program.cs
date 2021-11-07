@@ -9,8 +9,61 @@ namespace Vaja02
 {
     class TCPServer
     {
+        static public bool PreveriFEN(string s)
+        {
+            int v = 0;
+            int skupaj = 0;
+            int vrstica = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '/' && v != 8) return false;
+                else if (s[i] == '/' && v == 8)
+                {
+                    v = 0;
+                    vrstica++;
+                    continue;
+                }
+                else if (Char.IsDigit(s[i]))
+                {
+                    v += int.Parse(s[i].ToString());
+                    skupaj += int.Parse(s[i].ToString());
+                    vrstica++;
+                }
+                else if (Char.IsLetter(s[i]))
+                {
+                    v++;
+                    skupaj++;
+                    vrstica++;
+                }
+                else if (skupaj == 64) break;
+            }
+
+            int stPresledkov = 0;
+
+            for (int i = vrstica; i < s.Length; i++)
+            {
+                if (s[i] == ' ')
+                {
+                    stPresledkov++;
+                    continue;
+                }
+                else if (s[i].ToString().ToLower() == "w" || s[i].ToString().ToLower() == "b" && stPresledkov == 1) continue;
+                else if ((s[i] == 'k' || s[i] == 'q' || s[i] == 'K' || s[i] == 'Q' || s[i] == '-') && stPresledkov == 2) continue;
+                else if(s[i] == '-' || Char.IsLetter(s[i]) && stPresledkov == 3)
+                {
+                    if (Char.IsLetter(s[i]) && Char.IsDigit(s[i + 1])) i++;
+                    continue;
+                }
+                else if (Char.IsDigit(s[i]) && stPresledkov > 3) continue;
+                else return false;
+            }
+
+            return true;
+        }
+
         static public string FEN(string s)                  //FEN funkcija za Forsyth-Edwards notacijo
         {
+            if (!PreveriFEN(s)) return "Ni pravilna FEN oblika";
             string odgovor = "";                            //v odgovor se bo sestavljalo sporocilo streznika
             int v = 0;                                      //spremenljivka v je da vem kdaj se vrstica konča (vsaka vrstica v sahu ima 8 mest)
             for (int i = 0; i < s.Length; i++)
@@ -148,7 +201,11 @@ namespace Vaja02
                         msg = Encoding.ASCII.GetBytes(FEN(data));
                         break;
                     case 'G':
-                        string x = Sifriranje(data, "mykey");
+                        int dolzina = int.Parse(data[0].ToString());
+                        data = data.Remove(0, 1);
+                        string key = data.Substring(0, dolzina);
+                        data = data.Remove(0, dolzina);
+                        string x = Sifriranje(data, key);
                         msg = Encoding.ASCII.GetBytes(x);
                         break;
                     default:
@@ -159,6 +216,7 @@ namespace Vaja02
 
                 Console.WriteLine("Odgovoril sem: " + Encoding.Default.GetString(msg));
                 povezava.Send(msg);
+
                 povezava.Close();
             }
         }
