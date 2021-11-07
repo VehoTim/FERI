@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\TCPClient.csproj",
+      "projectUniqueName": "F:\\FERI\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\TCPClient.csproj",
       "projectName": "TCPClient",
-      "projectPath": "F:\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\TCPClient.csproj",
+      "projectPath": "F:\\FERI\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\TCPClient.csproj",
       "packagesPath": "C:\\Users\\timve\\.nuget\\packages\\",
-      "outputPath": "F:\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\obj\\",
+      "outputPath": "F:\\FERI\\FERI\\2nd year\\MUR\\TCPClient\\TCPClient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\timve\\AppData\\Roaming\\NuGet\\NuGet.Config",
