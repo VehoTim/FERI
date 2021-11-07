@@ -157,7 +157,8 @@ namespace Vaja02
             byte[] msg = Encoding.ASCII.GetBytes("");                   //to bo poslano clientu
 
 
-            IPAddress ipNaslov = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];    
+            IPAddress ipNaslov = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1];
+
             IPEndPoint cilj = new IPEndPoint(ipNaslov, 1234);                           //cilj je ip naslov in vrata preko katerih se bomo povezali (lahko so karkoli)
 
             Socket vticnica = new Socket(ipNaslov.AddressFamily, SocketType.Stream, ProtocolType.Tcp);

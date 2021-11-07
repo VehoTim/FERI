@@ -26,7 +26,7 @@ namespace Vaja02
         {
             byte[] prejeto = new byte[1024];                                                //sem se bo shranilo sporocilo serverja
             
-            IPAddress ipNaslov = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];        
+            IPAddress ipNaslov = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1];        
             IPEndPoint ipCilj = new IPEndPoint(ipNaslov, 1234);                             //cilj je ip naslov in vrata preko katerih se bomo povezali (lahko so karkoli)
 
             string vnos;                    //uporabnikov vnos (glava in sporocilo)
