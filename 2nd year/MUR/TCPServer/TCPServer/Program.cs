@@ -9,37 +9,38 @@ namespace Vaja02
 {
     class TCPServer
     {
-        static public string FEN(string s)
+        static public string FEN(string s)                  //FEN funkcija za Forsyth-Edwards notacijo
         {
-            string odgovor = "";
-            int v = 0;
+            string odgovor = "";                            //v odgovor se bo sestavljalo sporocilo streznika
+            int v = 0;                                      //spremenljivka v je da vem kdaj se vrstica konča (vsaka vrstica v sahu ima 8 mest)
             for (int i = 0; i < s.Length; i++)
             {
                 if (v == 8) odgovor += '\n';
-                if (Char.IsLetter(s[i]))
+                if (Char.IsLetter(s[i]))                    //ce je crko jo izpisemo in povecamo v
                 {
                     odgovor += s[i];
                     v++;
                 }
-                else if (Char.IsDigit(s[i]))
+                else if (Char.IsDigit(s[i]))                //ce je stevilka izpisemo toliko presledkov kolikor je stevilka in povecujemo v
                 {
                     for (int j = 0; j < int.Parse(s[i].ToString()); j++)
                     {
-                        //s[i];
                         odgovor += ' ';
                         v++;
                     }
                 }
-                else if (s[i] == '/')
+                else if (s[i] == '/')                       //znak / oznacuje konec vrstice (v postavimo na 0 in nadaljujemo)
                 {
                     v = 0;
                     continue;
                 }
-                else if (s[i] == ' ')
+                else if (s[i] == ' ')                       //ko pridemo do presledka pomeni da smo koncali z izrisovanjem polja
                 {
+                    //dolocitev kdo je na potezi
                     if (s[i + 1] == 'w') odgovor += "\n\nNa vrsti beli";
                     else odgovor += "\n\nNa vrsti crni";
 
+                    //dolocitev mogocih rokad
                     odgovor += "\n\nMoznosti rokade:";
                     int j = 3;
                     while (s[i + j] != ' ' && s[i + j] != '-')
@@ -56,6 +57,7 @@ namespace Vaja02
                     }
                     j++;
 
+                    //dolocitev ali je mogoce izvesti en passant in izpis kje je mogoc
                     odgovor += "\n\nMoznosti en passant:";
                     if (s[i + j] == '-')
                     {
@@ -69,6 +71,7 @@ namespace Vaja02
                     }
                     j++;
 
+                    //izpis polpotez in potez
                     odgovor += "\n\nStevilo polpotez: " + s[i + j];
                     j += 2;
                     odgovor += "\n\nStevilka trenutne poteze: " + s[i + j];
@@ -79,22 +82,17 @@ namespace Vaja02
             return odgovor;
         }
 
-        static public string Encrypt(string source, string key)
+        static public string Sifriranje(string besedilo, string kljuc)
         {
-            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
-            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
+            TripleDESCryptoServiceProvider tripleDes = new TripleDESCryptoServiceProvider();        //uporabljen za sifriranje sporocila
+            MD5CryptoServiceProvider hash = new MD5CryptoServiceProvider();                         //uporabljen za ustvarjanje kljuca prave velikosti iz nasega kljuca
 
-            byte[] byteHash;
-            byte[] byteBuff;
+            byte[] byteHash = hash.ComputeHash(Encoding.ASCII.GetBytes(kljuc));                     //s pomocjo kljuca ustvarimo hash, ki bo uporabljen pri sifriranju
+            tripleDes.Key = byteHash;                                                               //ta hash shranimo kot kljuc za tripleDes
+            tripleDes.Mode = CipherMode.ECB;                                                        //nacin sifriranja (druge moznosti so CBC, CFB)
+            byte[] byteBes = Encoding.ASCII.GetBytes(besedilo);
 
-            byteHash = hashMD5Provider.ComputeHash(Encoding.ASCII.GetBytes(key));
-            desCryptoProvider.Key = byteHash;
-            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
-            byteBuff = Encoding.ASCII.GetBytes(source);
-
-            string encoded =
-                Convert.ToBase64String(desCryptoProvider.CreateEncryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-            return encoded;
+            return Convert.ToBase64String(tripleDes.CreateEncryptor().TransformFinalBlock(byteBes, 0, byteBes.Length)); //sifriramo sporocilo in ga vrnemu programu, ki ga bo poslal naprej
         }
 
         static void Main(string[] args)
@@ -150,7 +148,7 @@ namespace Vaja02
                         msg = Encoding.ASCII.GetBytes(FEN(data));
                         break;
                     case 'G':
-                        string x = Encrypt(data, "mykey");
+                        string x = Sifriranje(data, "mykey");
                         msg = Encoding.ASCII.GetBytes(x);
                         break;
                     default:

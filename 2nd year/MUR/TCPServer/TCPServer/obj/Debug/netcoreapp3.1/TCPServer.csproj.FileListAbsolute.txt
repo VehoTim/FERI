@@ -26,3 +26,17 @@ F:\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.cspro
 F:\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.dll
 F:\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.pdb
 F:\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.genruntimeconfig.cache
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.exe
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.deps.json
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.runtimeconfig.json
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.runtimeconfig.dev.json
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.dll
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\bin\Debug\netcoreapp3.1\TCPServer.pdb
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.csproj.AssemblyReference.cache
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.GeneratedMSBuildEditorConfig.editorconfig
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.AssemblyInfoInputs.cache
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.AssemblyInfo.cs
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.csproj.CoreCompileInputs.cache
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.dll
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.pdb
+F:\FERI\FERI\2nd year\MUR\TCPServer\TCPServer\obj\Debug\netcoreapp3.1\TCPServer.genruntimeconfig.cache
