@@ -9,21 +9,17 @@ namespace Vaja02
 {
     class TCPClient
     {
-        public static string Decrypt(string encodedText, string key)
+        public static string Desifriranje(string kodiranoBesedilo, string kljuc)
         {
-            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
-            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
+            TripleDESCryptoServiceProvider tripleDes = new TripleDESCryptoServiceProvider();        //uporabljen za desifriranje sporocila
+            MD5CryptoServiceProvider hash = new MD5CryptoServiceProvider();                         //uporabljen za ustvarjanje kljuca prave velikosti iz nasega kljuca
 
-            byte[] byteHash;
-            byte[] byteBuff;
+            byte[] byteHash = hash.ComputeHash(Encoding.ASCII.GetBytes(kljuc));                     //s pomocjo kljuca ustvarimo hash, ki bo uporabljen pri sifriranju
+            tripleDes.Key = byteHash;                                                               //ta hash shranimo kot kljuc za tripleDes
+            tripleDes.Mode = CipherMode.ECB;                                                        //nacin sifriranja (druge moznosti so CBC, CFB)
+            byte[] byteBes = Convert.FromBase64String(kodiranoBesedilo);
 
-            byteHash = hashMD5Provider.ComputeHash(Encoding.ASCII.GetBytes(key));
-            desCryptoProvider.Key = byteHash;
-            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
-            byteBuff = Convert.FromBase64String(encodedText);
-
-            string plaintext = Encoding.ASCII.GetString(desCryptoProvider.CreateDecryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
-            return plaintext;
+            return Encoding.ASCII.GetString(tripleDes.CreateDecryptor().TransformFinalBlock(byteBes, 0, byteBes.Length));
         }
 
         private static void Main(String[] args)
@@ -77,8 +73,11 @@ namespace Vaja02
                             vnos = Console.ReadLine();
                             paket += vnos;
                             break;
-                        case 'G':
+                        case 'G':   TODO //fixaj ta del za vnos kljuca
                             paket = vnos;
+                            Console.WriteLine("Vpisi kljuc: ");
+                            vnos = Console.ReadLine();
+                            paket += vnos;
                             Console.WriteLine("Vpisi sporocilo, ki bo kodirano: ");
                             vnos = Console.ReadLine();
                             paket += vnos;
@@ -102,7 +101,16 @@ namespace Vaja02
                     x = x.Replace("\0", string.Empty);
 
                     Console.WriteLine(x);
-                    Console.WriteLine(Decrypt(x, "mykey"));
+                    Console.WriteLine("Vnesi kljuc za desifriranje?");
+                    string kljuc = Console.ReadLine();
+                    try
+                    {
+                        Console.WriteLine(Desifriranje(x, kljuc));
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Vnesen je bil napacen kljuc.");
+                    }
                 }
                 else Console.WriteLine(Encoding.Default.GetString(prejeto));
 

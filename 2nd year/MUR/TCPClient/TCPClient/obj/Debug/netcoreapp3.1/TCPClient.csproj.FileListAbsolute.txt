@@ -25,3 +25,17 @@ F:\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.cspro
 F:\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.dll
 F:\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.pdb
 F:\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.genruntimeconfig.cache
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.exe
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.deps.json
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.runtimeconfig.json
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.runtimeconfig.dev.json
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.dll
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\bin\Debug\netcoreapp3.1\TCPClient.pdb
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.csproj.AssemblyReference.cache
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.GeneratedMSBuildEditorConfig.editorconfig
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.AssemblyInfoInputs.cache
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.AssemblyInfo.cs
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.csproj.CoreCompileInputs.cache
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.dll
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.pdb
+F:\FERI\FERI\2nd year\MUR\TCPClient\TCPClient\obj\Debug\netcoreapp3.1\TCPClient.genruntimeconfig.cache
