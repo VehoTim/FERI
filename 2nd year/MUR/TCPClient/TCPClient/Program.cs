@@ -73,10 +73,14 @@ namespace Vaja02
                             vnos = Console.ReadLine();
                             paket += vnos;
                             break;
-                        case 'G':   TODO //fixaj ta del za vnos kljuca
+                        case 'G':
                             paket = vnos;
-                            Console.WriteLine("Vpisi kljuc: ");
-                            vnos = Console.ReadLine();
+                            do
+                            {
+                                Console.WriteLine("Vpisi kljuc (krajsi od 9 znakov): ");
+                                vnos = Console.ReadLine();
+                            } while (vnos.Length > 9);
+                            paket += vnos.Length;
                             paket += vnos;
                             Console.WriteLine("Vpisi sporocilo, ki bo kodirano: ");
                             vnos = Console.ReadLine();
