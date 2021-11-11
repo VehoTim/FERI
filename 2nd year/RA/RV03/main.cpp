@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//izpis menija
 void printMeni(){
     cout << "Meni:" << endl;
     cout << "1) Kodiranje" << endl;
@@ -10,21 +11,19 @@ void printMeni(){
     cout << endl << "Izbira: ";
 }
 
+//preverjanje znaka pri kodiranju
 bool preveriZnak(unsigned int i){
     if(i > 1114111){
         cout << "Znak ne obstaja" << endl;
         return false;
     }
-    else if(i == 32){
-        cout << "Vpisan znak 32 (space)" << endl;
-    }
-    else if(i == 127){
-        cout << "Vpisan znak 127 (delete)" << endl;
-    }
+    else if(i == 32) cout << "Vpisan znak 32 (space)" << endl;
+    else if(i == 127) cout << "Vpisan znak 127 (delete)" << endl;
     else cout << "Vpisan znak: " << char(i) << endl;
     return true;
 }
 
+//preverjanje oblike UTF pri dekodiranju
 bool preveriUTF(unsigned int utf){
     bool byte1[8];
     bool byte2[8];
@@ -97,6 +96,7 @@ bool preveriUTF(unsigned int utf){
     else return false;
 }
 
+//funkcija za potenciranje
 int pow(int x, int p)
 {
     if (p == 0) return 1;
@@ -107,25 +107,26 @@ int pow(int x, int p)
     else return x * tmp * tmp;
 }
 
+//izpis kodiranja (vnese se decimalno stevilo in izhod je binarni utf izpis)
 void printKodiranje(unsigned int znak){
     bool byte1[8];
     bool byte2[8];
     bool byte3[8];
     bool byte4[8];
-    byte2[0] = byte3[0] = byte4[0] = 1;
-    byte2[1] = byte3[1] = byte4[1] = 0;
+    byte2[0] = byte3[0] = byte4[0] = true;
+    byte2[1] = byte3[1] = byte4[1] = false;
     if(znak < 128){
-        byte1[0] = 0;
+        byte1[0] = false;
         for (int i = 7; i > 0; --i) {
             byte1[i] = znak % 2;
             znak = znak / 2;
         }
         cout << "UTF-8 binarna oblika: ";
-        for (int i = 0; i < 8; ++i) cout << byte1[i];
+        for (bool b : byte1) cout << b;
     }
     else if(znak < 2048){
-        byte1[0] = byte1[1] = 1;
-        byte1[2] = 0;
+        byte1[0] = byte1[1] = true;
+        byte1[2] = false;
         for (int i = 7; i > 1; --i) {
             byte2[i] = znak % 2;
             znak = znak / 2;
@@ -135,13 +136,13 @@ void printKodiranje(unsigned int znak){
             znak = znak / 2;
         }
         cout << "UTF-8 binarna oblika: ";
-        for (int i = 0; i < 8; ++i) cout << byte1[i];
+        for (bool b : byte1) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte2[i];
+        for (bool b : byte2) cout << b;
     }
     else if(znak < 65536){
-        byte1[0] = byte1[2] = byte1[1] = 1;
-        byte1[3] = 0;
+        byte1[0] = byte1[2] = byte1[1] = true;
+        byte1[3] = false;
         for (int i = 7; i > 1; --i) {
             byte3[i] = znak % 2;
             znak = znak / 2;
@@ -155,15 +156,15 @@ void printKodiranje(unsigned int znak){
             znak = znak / 2;
         }
         cout << "UTF-8 binarna oblika: ";
-        for (int i = 0; i < 8; ++i) cout << byte1[i];
+        for (bool b : byte1) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte2[i];
+        for (bool b : byte2) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte3[i];
+        for (bool b : byte3) cout << b;
     }
     else if(znak < 1114111 ){
-        byte1[0] = byte1[1] = byte1[2] = byte1[3] = 1;
-        byte1[4] = 0;
+        byte1[0] = byte1[1] = byte1[2] = byte1[3] = true;
+        byte1[4] = false;
         for (int i = 7; i > 1; --i) {
             byte4[i] = znak % 2;
             znak = znak / 2;
@@ -181,23 +182,24 @@ void printKodiranje(unsigned int znak){
             znak = znak / 2;
         }
         cout << "UTF-8 binarna oblika: ";
-        for (int i = 0; i < 8; ++i) cout << byte1[i];
+        for (bool b : byte1) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte2[i];
+        for (bool b : byte2) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte3[i];
+        for (bool b : byte3) cout << b;
         cout << " ";
-        for (int i = 0; i < 8; ++i) cout << byte4[i];
+        for (bool b : byte4) cout << b;
     }
     cout << endl;
 }
 
+//izpis dekodiranja (vnese se hex stevilo kot string  preveri oblika in vrne se decimalno stevilo)
 void printDekodiranje(string znak){
     if(!(znak.length() == 2 && toupper(znak[0]) =='F' && (toupper(znak[1]) =='F' || toupper(znak[1]) =='E'))){
 
         unsigned int vrednost = 0;
         int utez = 0;
-        for (int i = znak.length() - 1; i >= 0 ; --i) {
+        for (unsigned int i = znak.length() - 1; i >= 0 ; --i) {
             if (znak[i] < 58 && znak[i] != 32){
                 vrednost += (znak[i] - '0') * pow(16, utez);
                 utez++;
@@ -222,6 +224,7 @@ void printDekodiranje(string znak){
     else cout << "Ta koda ni dovoljena za dekodiranje";
 }
 
+//glavni program
 int main() {
     bool nadaljuj = true;
     int izbira;
