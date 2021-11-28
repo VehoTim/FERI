@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e860dac8-6369-4134-9e3d-b2b4773f9227": {
+      "ProjectGuid": "e860dac8-6369-4134-9e3d-b2b4773f9227",
+      "DisplayName": "KlepetServer",
+      "ColorIndex": 0
+    },
+    "1d395704-d8d5-4b22-a0db-eedf69630f67": {
+      "ProjectGuid": "1d395704-d8d5-4b22-a0db-eedf69630f67",
+      "DisplayName": "KlepetGUI",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

@@ -1,0 +1,17 @@
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\KlepetGUI.exe
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\KlepetGUI.deps.json
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\KlepetGUI.runtimeconfig.json
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\KlepetGUI.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\ref\KlepetGUI.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\bin\Release\net6.0-windows\KlepetGUI.pdb
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.csproj.AssemblyReference.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.Form1.resources
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.csproj.GenerateResource.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.GeneratedMSBuildEditorConfig.editorconfig
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.AssemblyInfoInputs.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.AssemblyInfo.cs
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.csproj.CoreCompileInputs.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\ref\KlepetGUI.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.pdb
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetGUI\obj\Release\net6.0-windows\KlepetGUI.genruntimeconfig.cache

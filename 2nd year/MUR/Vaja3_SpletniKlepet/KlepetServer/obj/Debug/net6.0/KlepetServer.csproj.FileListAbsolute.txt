@@ -1,0 +1,15 @@
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\KlepetServer.exe
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\KlepetServer.deps.json
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\KlepetServer.runtimeconfig.json
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\KlepetServer.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\ref\KlepetServer.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\bin\Debug\net6.0\KlepetServer.pdb
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.csproj.AssemblyReference.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.AssemblyInfoInputs.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.AssemblyInfo.cs
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.csproj.CoreCompileInputs.cache
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\ref\KlepetServer.dll
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.pdb
+D:\_RIT_UN\2. Letnik\MREŽNO USMERJENO RAČUNANJE\Vaja 3\Vaja3_SpletniKlepet\KlepetServer\obj\Debug\net6.0\KlepetServer.genruntimeconfig.cache

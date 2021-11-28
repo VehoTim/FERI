@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "KlepetGUI/1.0.0": {
+        "runtime": {
+          "KlepetGUI.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "KlepetGUI/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
