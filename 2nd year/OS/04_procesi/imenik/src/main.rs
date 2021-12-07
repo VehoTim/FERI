@@ -85,22 +85,49 @@ fn vnos(stevilka: String, stevilke: &mut Vec<String>, imena: &mut Vec<String>, p
 }
 
 //funkcija za iskanje
-fn iskanje(niz: String, stevilke: &mut Vec<String>, imena: &mut Vec<String>, priimki: &mut Vec<String>) -> Vec<usize> {
+fn iskanje(niz: &mut String, stevilke: &mut Vec<String>, imena: &mut Vec<String>, priimki: &mut Vec<String>) -> Vec<usize> {
     
     let mut _indeksi: Vec<usize> = Vec::new();
-
-     //iskanje po vektorju za ujemanje
-     let mut n = 0;
-     while n < stevilke.len() {
-         if imena[n].contains(&niz) {
+    //iskanje po vektorju za ujemanje
+    let mut n = 0;
+    while n < stevilke.len() {
+        //if vsebuje(niz.to_string(), &mut imena[n]/*, priimki[n]*/) {
+        //if imena[n].contains(&niz) {
+        if imena[n].contains("Ti") {
             _indeksi.push(n);
-         } else if priimki[n].contains(&niz) {
+        } 
+        //else if priimki[n].contains(&niz) {
+         else if priimki[n].contains("Ve") {
             _indeksi.push(n);
-         }
-         n += 1;
-     } 
-     return _indeksi;
+        }
+        else {
+            println!("Ne vsebuje :C");
+        }
+        n += 1;
+    } 
+    return _indeksi;
 }
+
+/*fn vsebuje (niz: String, ime: &mut String/*, priimek: String*/) -> bool {
+    let is = niz.len();
+    let mut n = 0;
+    let mut m = 0;
+    while n < ime.len() && m != is{
+        if ime.chars().nth(n).unwrap() == niz.chars().nth(m).unwrap() {
+            m += 1;
+        }
+        else {
+            m = 0;
+        }
+        n += 1;
+    }
+    if m == is {
+        return true;
+    }
+    else {
+        return false;
+    }
+}*/
 
 fn main() {
     let mut imena: Vec<String> = Vec::new();
@@ -116,10 +143,10 @@ fn main() {
 
     //brisanje
     println!("Vpisi stevilko: ");
-    let mut stIzbris = String::new();
-    std::io::stdin().read_line(&mut stIzbris);
+    let mut st_izbris = String::new();
+    std::io::stdin().read_line(&mut st_izbris);
 
-    if izbris(stIzbris, &mut stevilke, &mut imena, &mut priimki) {
+    if izbris(st_izbris, &mut stevilke, &mut imena, &mut priimki) {
         println!("Uspesno izbrisan");
     } else {
         println!("Vnos s to stevilko ne obstaja");
@@ -127,25 +154,20 @@ fn main() {
 
     //izpis
     println!("Vpisi stevilko: ");
-    let mut stVnos = String::new();
-    std::io::stdin().read_line(&mut stVnos);
+    let mut st_vnos = String::new();
+    std::io::stdin().read_line(&mut st_vnos);
 
-    if !vnos(stVnos, &mut stevilke, &mut imena, &mut priimki) {
+    if !vnos(st_vnos, &mut stevilke, &mut imena, &mut priimki) {
         println!("Vnos s to stevilko ne obstaja");
     }
 
-    // TODO - koncati iskanje in basically vse ostalo
-
     //iskanje
-    let mut nizVnos = String::new();
-    std::io::stdin().read_line(&mut nizVnos);
+    let mut niz_vnos = String::new();
+    std::io::stdin().read_line(&mut niz_vnos);
 
-    let ix: Vec<usize> = iskanje(nizVnos, &mut stevilke, &mut imena, &mut priimki);
+    let ix: Vec<usize> = iskanje(&mut niz_vnos, &mut stevilke, &mut imena, &mut priimki);
 
     for i in ix {
-        println!("{} {} - {}", imena[i], priimki[i], stevilke[i]);
-        //vnos(stevilke[i].to_string(), &mut stevilke, &mut imena, &mut priimki);
+        vnos(stevilke[i].to_string(), &mut stevilke, &mut imena, &mut priimki);
     }
-
-    //println!("{}", stevilke.len());
 }
