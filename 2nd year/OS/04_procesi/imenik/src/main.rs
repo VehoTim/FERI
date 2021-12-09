@@ -68,7 +68,6 @@ fn izbris(stevilka: String) -> bool {
             n += 1;
         } 
         return false;
-
     }
 }
 
@@ -167,9 +166,24 @@ fn handle_client(mut stream: TcpStream) {
 
                 //dodajanje
                 if beri(String::from_utf8_lossy(&ime[..]).to_string().replace('\0', ""), String::from_utf8_lossy(&priimek[..]).to_string().replace('\0', ""), String::from_utf8_lossy(&stevilka[..]).to_string().replace('\0', "")){
-                    println!("Uspesno dodan");
+                    stream.write(b"Uspesno dodali").unwrap();
                 } else {
-                    println!("Napaka pri vnosu");
+                    stream.write(b"Vnos ni uspel").unwrap();;
+                }
+            }
+            else if &data[0..2] == b"#I" {
+                println!("Brisem podatke"); 
+                stream.write(&data[0..size]).unwrap(); 
+
+                stream.read(&mut stevilka);
+                println!("Brisem vnos: {}", from_utf8(&stevilka).unwrap());
+                stream.write(&stevilka[..]).unwrap();
+
+                //brisanje
+                if izbris(String::from_utf8_lossy(&stevilka[..]).to_string().replace('\0', "")) {
+                    stream.write(b"Uspesno izbrisali").unwrap();
+                } else {
+                    stream.write(b"Izbris ni uspel").unwrap();
                 }
             }
         },
@@ -191,6 +205,7 @@ fn main() {
                 thread::spawn(move || {
                     handle_client(stream);
                 });
+                println!("--- Konec niti ---")
             }
             Err(e) => {
                 println!("Error: {}", e);
