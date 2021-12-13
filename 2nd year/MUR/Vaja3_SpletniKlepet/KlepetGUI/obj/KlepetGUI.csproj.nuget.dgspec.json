@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\_RIT_UN\\2. Letnik\\MREŽNO USMERJENO RAČUNANJE\\Vaja 3\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj": {}
+    "F:\\FERI\\FERI\\2nd year\\MUR\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj": {}
   },
   "projects": {
-    "D:\\_RIT_UN\\2. Letnik\\MREŽNO USMERJENO RAČUNANJE\\Vaja 3\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj": {
+    "F:\\FERI\\FERI\\2nd year\\MUR\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_RIT_UN\\2. Letnik\\MREŽNO USMERJENO RAČUNANJE\\Vaja 3\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj",
+        "projectUniqueName": "F:\\FERI\\FERI\\2nd year\\MUR\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj",
         "projectName": "KlepetGUI",
-        "projectPath": "D:\\_RIT_UN\\2. Letnik\\MREŽNO USMERJENO RAČUNANJE\\Vaja 3\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj",
+        "projectPath": "F:\\FERI\\FERI\\2nd year\\MUR\\Vaja3_SpletniKlepet\\KlepetGUI\\KlepetGUI.csproj",
         "packagesPath": "C:\\Users\\timve\\.nuget\\packages\\",
-        "outputPath": "D:\\_RIT_UN\\2. Letnik\\MREŽNO USMERJENO RAČUNANJE\\Vaja 3\\Vaja3_SpletniKlepet\\KlepetGUI\\obj\\",
+        "outputPath": "F:\\FERI\\FERI\\2nd year\\MUR\\Vaja3_SpletniKlepet\\KlepetGUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\timve\\AppData\\Roaming\\NuGet\\NuGet.Config",

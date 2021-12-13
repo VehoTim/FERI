@@ -1,0 +1,11 @@
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\bin\Debug\HibridnoSifriranje.exe.config
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\bin\Debug\HibridnoSifriranje.exe
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\bin\Debug\HibridnoSifriranje.pdb
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.csproj.AssemblyReference.cache
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.csproj.SuggestedBindingRedirects.cache
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.Form1.resources
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.Properties.Resources.resources
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.csproj.GenerateResource.cache
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.csproj.CoreCompileInputs.cache
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.exe
+F:\FERI\FERI\2nd year\MUR\Vaja4\HibridnoSifriranje\HibridnoSifriranje\obj\Debug\HibridnoSifriranje.pdb
