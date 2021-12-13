@@ -18,75 +18,62 @@ namespace HibridnoSifriranje
     {
         Stream stream;
 
+        // za izracun vrednosti, ki bo skupna posiljatelju in prejemniku
+        // uporabljala se bo pri enkripciji kot geslo
         int izracunVrednosti(int a, int b, int P)
         {
-            if (b == 1)
-                return a;
-            else
-                return ((int)Math.Pow(a, b) % P);
+            return ((int)Math.Pow(a, b) % P);
         }
 
-        public static byte[] Encrypt(byte[] clearData, byte[] Key, byte[] IV)
-        {
-            MemoryStream ms = new MemoryStream(); 
-            Rijndael alg = Rijndael.Create();
-            alg.Key = Key;
-            alg.IV = IV;
-            CryptoStream cs = new CryptoStream(ms,
-               alg.CreateEncryptor(), CryptoStreamMode.Write);
-
-            cs.Write(clearData, 0, clearData.Length);
-            cs.Close();
-
-            byte[] encryptedData = ms.ToArray();
-
-            return encryptedData;
-        }
-
+        //enkripcija sporocila s pomocjo rijndael algoritma (AES)
         public static byte[] Encrypt(byte[] clearData, string Password)
         {
-            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password,
-                new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d,
-            0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
+            //s pomocjo gesla dobimo pdb, ki ga bomo uporabili pri enkripciji in dekripciji
+            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password, new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
 
-            return Encrypt(clearData, pdb.GetBytes(32), pdb.GetBytes(16));
-        }
-
-
-        public static byte[] Decrypt(byte[] cipherData, byte[] Key, byte[] IV)
-        {
             MemoryStream ms = new MemoryStream();
 
             Rijndael alg = Rijndael.Create();
 
-            alg.Key = Key;
-            alg.IV = IV;
+            alg.Key = pdb.GetBytes(32);
+            alg.IV = pdb.GetBytes(16);
 
-            CryptoStream cs = new CryptoStream(ms,
-                alg.CreateDecryptor(), CryptoStreamMode.Write);
+            CryptoStream cs = new CryptoStream(ms, alg.CreateEncryptor(), CryptoStreamMode.Write);
+
+            cs.Write(clearData, 0, clearData.Length);
+
+            cs.Close();
+
+            return ms.ToArray();
+        }
+
+        //dekripcija sporocila s pomocjo rijndael algoritma (AES)
+        public static byte[] Decrypt(byte[] cipherData, string Password)
+        { 
+            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password, new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
+
+            MemoryStream ms = new MemoryStream();
+
+            Rijndael alg = Rijndael.Create();
+
+            alg.Key = pdb.GetBytes(32);
+            alg.IV = pdb.GetBytes(16);
+
+            CryptoStream cs = new CryptoStream(ms, alg.CreateDecryptor(), CryptoStreamMode.Write);
 
             cs.Write(cipherData, 0, cipherData.Length);
 
             cs.Close();
 
-            byte[] decryptedData = ms.ToArray();
-
-            return decryptedData;
+            return ms.ToArray();
         }
-
-        public static byte[] Decrypt(byte[] cipherData, string Password)
-        { 
-            PasswordDeriveBytes pdb = new PasswordDeriveBytes(Password, new byte[] {0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76});
-
-            return Decrypt(cipherData, pdb.GetBytes(32), pdb.GetBytes(16));
-        }
-
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        // iskanje ip naslova
         public static string GetIpAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -100,6 +87,7 @@ namespace HibridnoSifriranje
             throw new Exception("Ip naslov ni bil najden");
         }
 
+        //branje sporocil
         public static byte[] Beri(Socket client)
         {
             byte[] buffer = new byte[1024];
@@ -107,142 +95,250 @@ namespace HibridnoSifriranje
 
             return buffer;
         }
+        public static byte[] Beri(Stream stream)
+        {
+            byte[] buffer = new byte[1024];
+            int k = stream.Read(buffer, 0, buffer.Length);
 
+            return buffer;
+        }
+
+        public static void poslji(byte[] vsebina, Stream stream)
+        {
+            stream.Write(vsebina, 0, vsebina.Length);
+        }
+
+        public static void poslji(byte[] vsebina, Socket socket)
+        {
+            socket.Send(vsebina);
+        }
         private void buttonSend_Click(object sender, EventArgs e)
         {
             UTF8Encoding encoding = new UTF8Encoding();
-            int a = 4245;
-
-            string ip = GetIpAddress();
-            TcpClient tcpClient = new TcpClient();
-            tcpClient.Connect(IPAddress.Parse(ip), 1234);
-            stream = tcpClient.GetStream();
-
-            int P = 12123;
-            stream.Write(BitConverter.GetBytes(P), 0, BitConverter.GetBytes(P).Length);
-
-            byte[] tujKljuc = new byte[1024];
-            int k = stream.Read(tujKljuc, 0, tujKljuc.Length);
-
-            int x = izracunVrednosti(BitConverter.ToInt32(tujKljuc, 0), a, P);
-
-            stream.Write(BitConverter.GetBytes(x), 0, BitConverter.GetBytes(x).Length);
-
-            byte[] yKey = new byte[1024];
-            k = stream.Read(yKey, 0, yKey.Length);
-
-            int ka = izracunVrednosti(BitConverter.ToInt32(yKey, 0), a, P);
-
-            OpenFileDialog ofd = new OpenFileDialog
-            {
-                InitialDirectory = @"D:\",
-                Title = "Browse Text Files",
-
-                CheckFileExists = true,
-                CheckPathExists = true,
-
-                FilterIndex = 2,
-                RestoreDirectory = true,
-
-                ReadOnlyChecked = true,
-                ShowReadOnly = true
-            };
-
+            Random rnd = new Random();
+            TcpClient tcpClient = null;
             string ext = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            byte[] fileBytes = null;
+            byte[] encryptedtext = null;
+
+            //a je private key
+            int a = rnd.Next();
+            //P je public key
+            int P = rnd.Next();
+            //ka bo geslo za enkripcijo in dekripcijo
+            int ka = 0;
+
+            //vzpostavitev povezave
+            string ip = GetIpAddress();
+            try
             {
-                ext = openFileDialog1.SafeFileName;
+                tcpClient = new TcpClient();
+                tcpClient.Connect(IPAddress.Parse(ip), 1234);
+                stream = tcpClient.GetStream();
+            }
+            catch
+            {
+                label1.Text = "Prislo je do napake pri povezovanju";
+                return;
             }
 
-            label1.Text = ext;
-
-            stream.Write(Encoding.UTF8.GetBytes(ext), 0, Encoding.UTF8.GetBytes(ext).Length);
-
-            byte[] fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
-
-            byte[] encryptedtext = Encrypt(fileBytes, ka.ToString());
-
-            stream.Write(BitConverter.GetBytes(encryptedtext.Length), 0, BitConverter.GetBytes(encryptedtext.Length).Length);
-
-            for (int i = 0; i < encryptedtext.Length; i++)
+            //izmenjava kljucev
+            try
             {
-                stream.WriteByte(encryptedtext[i]);
+                //posljemo svoj public key
+                poslji(BitConverter.GetBytes(P), stream);
+
+                //prejmemo njihov public key
+                byte[] tujKljuc = Beri(stream);
+
+                //izracunamo in posljemo x, ki je vmesna vrednost
+                int x = izracunVrednosti(BitConverter.ToInt32(tujKljuc, 0), a, P);
+                poslji(BitConverter.GetBytes(x), stream);
+
+                //prejmemo njihovo vmesno vrednost
+                byte[] yKey = new byte[1024];
+                int k = stream.Read(yKey, 0, yKey.Length);
+
+                //izracunamo geslo za enkripcijo in dekripcijo
+                ka = izracunVrednosti(BitConverter.ToInt32(yKey, 0), a, P);
             }
+            catch
+            {
+                label1.Text = "Prislo je do napake pri izmenjavi kljucev";
+                return;
+            }
+
+            //izberemo datoteko, ki jo zelimo poslati
+            try
+            {
+                OpenFileDialog ofd = new OpenFileDialog
+                {
+                    InitialDirectory = @"D:\",
+                    Title = "Browse Text Files",
+
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+
+                    FilterIndex = 2,
+                    RestoreDirectory = true,
+
+                    ReadOnlyChecked = true,
+                    ShowReadOnly = true
+                };
+
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    ext = openFileDialog1.SafeFileName;
+                }
+
+                label1.Text = ext;
+                
+                //posljemo ime datoteke in koncnico, da bo nastala datoteka enaka trenutni
+                poslji(Encoding.UTF8.GetBytes(ext), stream);
+            }
+            catch
+            {
+                label1.Text = "Napaka pri izbiri datoteke";
+                return;
+            }
+
+            label1.Text = "Posiljanje datoteke...";
+
+            //posiljanje enkriptirane datoteke
+            try
+            {
+                //preberemo bajte datoteke
+                fileBytes = File.ReadAllBytes(openFileDialog1.FileName);
+                //jih enkriptiramo
+                encryptedtext = Encrypt(fileBytes, ka.ToString());
+                //posljemo dolzino kriptirane datoteke, da bo prejemnik vedel koliko bajtov mora prebrati
+                poslji(BitConverter.GetBytes(encryptedtext.Length), stream);
+
+                //posiljamo bajt po bajt
+                for (int i = 0; i < encryptedtext.Length; i++)
+                {
+                    stream.WriteByte(encryptedtext[i]);
+
+                    //label1.Text = i.ToString() + "/" + (encryptedtext.Length - 1);
+                }
+            }
+            catch
+            {
+                label1.Text = "Prislo je do napake pri posiljanju kriptiranju datoteke";
+                return;
+            }
+
+            label1.Text = "Datoteka uspešno poslana";
 
             tcpClient.Close();
         }
 
         private void buttonRcv_Click(object sender, EventArgs e)
         {
-            int b = 6544;
-            UTF8Encoding encoding = new UTF8Encoding();
+            Random rnd = new Random();
+            //b je private key
+            int b = rnd.Next();
+            //G je public key
+            int G = rnd.Next();
+            int kb = 0;
+            TcpListener listener = null;
+            Socket socket = null;
+            byte[] tujKljuc = null;
 
-            TcpListener listener = new TcpListener(IPAddress.Any, 1234);
-            listener.Start();
+            label1.Text = "Prejemanje datoteke...";
 
-            Socket socket = listener.AcceptSocket();
+            //zazenemo poslusalca za prejemnika datoteke
+            try
+            {
+                listener = new TcpListener(IPAddress.Any, 1234);
+                listener.Start();
 
-            byte[] tujKljuc = Beri(socket);
+                socket = listener.AcceptSocket();
+            }
+            catch
+            {
+                label1.Text = "Prislo je do napake pri vzpostavljanju povezave";
+                return;
+            }
 
-            int G = 51349;
+            //izmenjava kljucev
+            try
+            {
+                //prejmemo public key posiljatelja
+                tujKljuc = Beri(socket);
+                //posljemo svoj public key
+                poslji(BitConverter.GetBytes(G), socket);
+                //izracunamo vmesno vrednost
+                int y = izracunVrednosti(G, b, BitConverter.ToInt32(tujKljuc, 0));
+                //prejmemo vmesno vrednost posiljatelja
+                byte[] xKey = Beri(socket);
+                //posljemo svojo vmesno vrednost
+                poslji(BitConverter.GetBytes(y), socket);
+                //izracunamo geslo za dekripcijo
+                kb = izracunVrednosti(BitConverter.ToInt32(xKey, 0), b, BitConverter.ToInt32(tujKljuc, 0));
+            }
+            catch
+            {
+                label1.Text = "Prislo je do napake pri izmenjavi kljucev";
+                return;
+            }
 
-            socket.Send(BitConverter.GetBytes(G));
-
-            int y = izracunVrednosti(G, b, BitConverter.ToInt32(tujKljuc, 0));
-
-            byte[] xKey = Beri(socket);
-
-            socket.Send(BitConverter.GetBytes(y));
-
-            int kb = izracunVrednosti(BitConverter.ToInt32(xKey, 0), b, BitConverter.ToInt32(tujKljuc, 0));
-
-            byte[] bf = new byte[1024];
-            socket.Receive(bf);
-
+            //dobimo ime datoteke
+            byte[] bf = Beri(socket);
             string ext = Encoding.UTF8.GetString(bf);
 
+            ext = ext.Replace("\0", "");
             label1.Text = ext;
 
-            ext = ext.Replace("\0", "");
-
+            //prejmemo dolzino datoteke
             int st = BitConverter.ToInt32(Beri(socket), 0);
 
-            label1.Text = st.ToString();
-
+            //kriptiran text je te dolzine
             byte[] encryptedText = new byte[st];
 
-            for (int i = 0; i < st; i++)
+            try
             {
-                byte[] buffer = new byte[1];
-                socket.Receive(buffer);
-                encryptedText[i] = buffer[0];
+
+                //zacnemo prejemati bajt po bajt in sestavljamo sporocilo
+                for (int i = 0; i < st; i++)
+                {
+                    byte[] buffer = new byte[1];
+                    socket.Receive(buffer);
+                    encryptedText[i] = buffer[0];
+
+                    //label1.Text = i.ToString () + "/" + (st-1);
+                }
+            }
+            catch 
+            { 
+                label1.Text = "Prislo je do napake pri prejemanju kriptirane datoteke";
+                return;
             }
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.InitialDirectory = @"C:\";
-            saveFileDialog1.Title = "Save text Files";
-            saveFileDialog1.CheckPathExists = true;
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
+            //Po potrebi ustvarimo mapo PREJETO
+            Directory.CreateDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PREJETO"));
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                ext = saveFileDialog1.FileName + ext;
-            }
+            //nastavimo pot kamor bomo shranili novo datoteko
+            ext = AppDomain.CurrentDomain.BaseDirectory + "PREJETO\\" + ext;
 
             label1.Text = ext;
 
+            //ce datoteka ze obstaja jo izbrisemo
+            if (File.Exists(@ext)) File.Delete(@ext);
 
-            if (File.Exists(@ext))
+            //
+            try
             {
-                File.Delete(@ext);
+                //dekriptiramo prejeto datoteko
+                byte[] decrypted = Decrypt(encryptedText, kb.ToString());
+
+                //shranimo jo v prej doloceno pot
+                using (FileStream fs = File.Create(@ext)) fs.Write(decrypted, 0, decrypted.Length);
             }
-
-            byte[] decrypted = Decrypt(encryptedText, kb.ToString());
-                        
-            using (FileStream fs = File.Create(@ext))
+            catch
             {
-                fs.Write(decrypted, 0, decrypted.Length);
+                label1.Text = "Prislo je do napake pri dekripciji in shranjevanju datoteke";
+                return;
             }
 
             listener.Stop();
