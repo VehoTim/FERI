@@ -1,3 +1,0 @@
-F:/FERI/FERI/1st year/PRO2/naloga0602/naloga06020502/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-F:/FERI/FERI/1st year/PRO2/naloga0602/naloga06020502/out/build/x64-Debug/CMakeFiles/naloga06020502.dir
-F:/FERI/FERI/1st year/PRO2/naloga0602/naloga06020502/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

@@ -18,10 +18,10 @@ namespace HibridnoSifriranje
     {
         Stream stream;
 
-        // za izracun vrednosti, ki bo skupna posiljatelju in prejemniku
-        // uporabljala se bo pri enkripciji kot geslo
+        // za izracun vrednosti, ki bo skupna posiljatelju in prejemniku (DH)
         int izracunVrednosti(int a, int b, int P)
         {
+            //a na b mod P
             return ((int)Math.Pow(a, b) % P);
         }
 

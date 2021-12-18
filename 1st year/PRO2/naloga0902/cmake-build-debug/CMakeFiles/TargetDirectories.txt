@@ -1,3 +1,0 @@
-F:/School/PRO II/naloga0902/cmake-build-debug/CMakeFiles/edit_cache.dir
-F:/School/PRO II/naloga0902/cmake-build-debug/CMakeFiles/naloga0902.dir
-F:/School/PRO II/naloga0902/cmake-build-debug/CMakeFiles/rebuild_cache.dir
