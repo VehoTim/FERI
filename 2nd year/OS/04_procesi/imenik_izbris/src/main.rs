@@ -1,57 +1,54 @@
-use std::net::{TcpStream};
 use std::io::{Read, Write};
 use std::str::from_utf8;
 use std::env::args;
+
+use std::os::unix::net::{UnixStream};
 
 fn main() {
     //preberemo argumente
     let stevilka: String = args().nth(1).unwrap();
 
-    match TcpStream::connect("localhost:1234") {
-        Ok(mut stream) => {
-            //dodati stevilo za lazje branje and its done
-            let msg = "#I".to_owned();
+    //povezemo na unix stream
+    let mut stream = UnixStream::connect("../imenik/imenik.sock").unwrap();
+    
+    //posljemo ukaz #I da streznik ve, da se bo izvajal izbris
+    let msg = "#I".to_owned();
 
-            stream.write(msg.as_bytes()).unwrap();
+    stream.write(msg.as_bytes()).unwrap();
 
-            let mut data = [0 as u8; 30]; // using 6 byte buffer
+    let mut data = [0 as u8; 30];
 
-            match stream.read(&mut data) {
-                Ok(_) => {
-                    println!("Uspesno poslan ukaz: {}", from_utf8(&data).unwrap());
-                    //prejeto sporocilo od serverja
-                },
-                Err(e) => {
-                    println!("Failed to receive data: {}", e);
-                }
-            }
-
-            //
-            stream.write(stevilka.as_bytes()).unwrap();
-
-            match stream.read(&mut data) {
-                Ok(_) => {
-                    println!("Uspesno poslano stevilka: {}", from_utf8(&data).unwrap());
-                    //prejeto sporocilo od serverja
-                },
-                Err(e) => {
-                    println!("Failed to receive data: {}", e);
-                }
-            }
-
-            match stream.read(&mut data) {
-                Ok(_) => {
-                    println!("{}", from_utf8(&data).unwrap());
-                    //prejeto sporocilo od serverja
-                },
-                Err(e) => {
-                    println!("Failed to receive data: {}", e);
-                }
-            }
+    //potrditev streznika
+    match stream.read(&mut data) {
+        Ok(_) => {
+            println!("Uspesno poslan ukaz: {}", from_utf8(&data).unwrap());
         },
         Err(e) => {
-            println!("Failed to connect: {}", e);
+            println!("Failed to receive data: {}", e);
         }
     }
-    println!("Terminated.");
+
+    //posljemo stevilko za izbris
+    stream.write(stevilka.as_bytes()).unwrap();
+
+    
+    //potrditev streznika
+    match stream.read(&mut data) {
+        Ok(_) => {
+            println!("Uspesno poslano stevilka: {}", from_utf8(&data).unwrap());
+        },
+        Err(e) => {
+            println!("Failed to receive data: {}", e);
+        }
+    }
+
+    //streznik sporoci ali je bil izbris uspesen
+    match stream.read(&mut data) {
+        Ok(_) => {
+            println!("{}", from_utf8(&data).unwrap());
+        },
+        Err(e) => {
+            println!("Failed to receive data: {}", e);
+        }
+    }
 }
