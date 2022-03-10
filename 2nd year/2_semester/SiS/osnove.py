@@ -34,8 +34,10 @@ def beri_zvok_stereo(pot_do_datoteke):
         return vektor / np.max(np.abs(vektor))
 
 def normaliziraj(vektor):
+    vektor = vektor.astype(float)
     oblika = vektor.shape
     tmp = np.reshape(vektor, (-1))
+    tmp = tmp.astype(float)
     maxNorm = 0
     for x in tmp:
         if abs(x) > maxNorm:
@@ -45,8 +47,11 @@ def normaliziraj(vektor):
     while i < tmp.size:
         tmp[i] = tmp[i] / maxNorm
         i += 1
+
+    vektor = np.reshape(tmp, oblika)
+    vektor = vektor.astype(float)
             
-    return np.reshape(tmp, oblika)
+    return vektor
 
 def normaliziraj_vektorsko(vektor):
     return vektor / np.max(np.abs(vektor))
@@ -64,4 +69,4 @@ def testiraj_cas_izvajanja(vektor):
     return np.array([[cas, cas2]])
 
 if __name__ == '__main__':
-    print(normaliziraj(generiraj_vektor_nakljucno(3)))
+    print(testiraj_cas_izvajanja(generiraj_vektor_nakljucno(1000000)))
