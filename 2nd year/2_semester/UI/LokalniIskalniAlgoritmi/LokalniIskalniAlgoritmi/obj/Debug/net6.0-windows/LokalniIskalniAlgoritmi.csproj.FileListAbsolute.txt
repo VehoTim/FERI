@@ -1,0 +1,17 @@
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\bin\Debug\net6.0-windows\LokalniIskalniAlgoritmi.exe
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\bin\Debug\net6.0-windows\LokalniIskalniAlgoritmi.deps.json
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\bin\Debug\net6.0-windows\LokalniIskalniAlgoritmi.runtimeconfig.json
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\bin\Debug\net6.0-windows\LokalniIskalniAlgoritmi.dll
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\bin\Debug\net6.0-windows\LokalniIskalniAlgoritmi.pdb
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.csproj.AssemblyReference.cache
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.Form1.resources
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.csproj.GenerateResource.cache
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.GeneratedMSBuildEditorConfig.editorconfig
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.AssemblyInfoInputs.cache
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.AssemblyInfo.cs
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.csproj.CoreCompileInputs.cache
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.dll
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\refint\LokalniIskalniAlgoritmi.dll
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.pdb
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\LokalniIskalniAlgoritmi.genruntimeconfig.cache
+F:\FERI\FERI\2nd year\2_semester\UI\LokalniIskalniAlgoritmi\LokalniIskalniAlgoritmi\obj\Debug\net6.0-windows\ref\LokalniIskalniAlgoritmi.dll
