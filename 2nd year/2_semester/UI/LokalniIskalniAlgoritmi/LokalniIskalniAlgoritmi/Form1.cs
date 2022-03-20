@@ -298,7 +298,8 @@ namespace LokalniIskalniAlgoritmi
 
                     int delH = najmanj - hev;
                     //ce je delH boljsi nadaljujemo
-                    if (delH >= 0)
+                    //if (delH >= 0)
+                    if (delH > 0)
                     {
                         if (hev == 0)
                         {
