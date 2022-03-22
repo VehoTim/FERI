@@ -5,33 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Vaja01"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="669" Width="1188">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="456,310,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="530,310,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="456,366,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="530,366,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="456,254,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="530,254,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="456,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62"/>
-        <TextBox HorizontalAlignment="Left" Margin="530,198,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="62" RenderTransformOrigin="1.961,5.223"/>
-        <Button Content="Calculate" HorizontalAlignment="Left" Margin="456,389,0,0" VerticalAlignment="Top" Width="136"/>
-        <Label Content="T4 (x)" HorizontalAlignment="Left" Margin="456,333,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T4 (y)" HorizontalAlignment="Left" Margin="530,333,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T3 (x)" HorizontalAlignment="Left" Margin="456,277,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T3 (y)" HorizontalAlignment="Left" Margin="530,277,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T2 (x)" HorizontalAlignment="Left" Margin="456,221,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T2 (y)" HorizontalAlignment="Left" Margin="530,221,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T1 (x)" HorizontalAlignment="Left" Margin="456,165,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <Label Content="T1 (y)" HorizontalAlignment="Left" Margin="530,165,0,0" VerticalAlignment="Top" Height="28" Width="62"/>
-        <GroupBox HorizontalAlignment="Left" Height="414" Header="GroupBox" Margin="223,0,0,0" VerticalAlignment="Center" Width="177">
-            <Grid>
-                <RadioButton Content="Two points" HorizontalAlignment="Left" Margin="20
-                             ,42,0,0" VerticalAlignment="Top"/>
-                <RadioButton Content="One point, one line" HorizontalAlignment="Left" Margin="634,62,0,357" Width="136"/>
-                <RadioButton Content="Two lines" HorizontalAlignment="Left" Margin="634,82,0,337" Width="136"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="22*"/>
+            <ColumnDefinition Width="14*"/>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1074*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox HorizontalAlignment="Left" Height="110" Header="GroupBox" Margin="885,10,0,0" VerticalAlignment="Top" Width="180
+                  " Grid.Column="7">
+            <Grid Height="384">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="13*"/>
+                    <ColumnDefinition Width="43*"/>
+                </Grid.ColumnDefinitions>
+                <RadioButton x:Name="rbTwoPoints" Content="Two points" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="True" Click="checkedChanged" Grid.ColumnSpan="2"/>
+                <RadioButton x:Name="rbOnePointOneLine" Content="One point, one line" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Click="checkedChanged" Grid.ColumnSpan="2"/>
+                <RadioButton x:Name="rbTwoLines" Content="Two lines" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Click="checkedChanged" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
-
+        <GroupBox HorizontalAlignment="Left" Height="306" Header="GroupBox" Margin="885,337,0,0" VerticalAlignment="Top" Width="180" Grid.Column="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="131*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtBoxT3x" HorizontalAlignment="Left" Margin="16,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" IsEnabled="False" Grid.ColumnSpan="3" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT3y" HorizontalAlignment="Left" Margin="53,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" IsEnabled="False" Grid.Column="2" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT4x" HorizontalAlignment="Left" Margin="16,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" IsEnabled="False" Grid.ColumnSpan="3" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT4y" HorizontalAlignment="Left" Margin="53,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" IsEnabled="False" Grid.Column="2" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT2x" HorizontalAlignment="Left" Margin="16,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Grid.ColumnSpan="3" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT2y" HorizontalAlignment="Left" Margin="53,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Grid.Column="2" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT1x" HorizontalAlignment="Left" Margin="16,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Grid.ColumnSpan="3" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <TextBox x:Name="txtBoxT1y" HorizontalAlignment="Left" Margin="53,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" RenderTransformOrigin="1.961,5.223" Grid.Column="2" LostKeyboardFocus="textBoxLostKeyFocus1"/>
+                <Button x:Name="btCalculate" Content="Calculate" HorizontalAlignment="Left" Margin="16,234,0,0" VerticalAlignment="Top" Width="136" IsEnabled="False" Click="btCalculate_Click" Grid.ColumnSpan="3"/>
+                <Label Content="T4 (x)" HorizontalAlignment="Left" Margin="16,178,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.ColumnSpan="3"/>
+                <Label Content="T4 (y)" HorizontalAlignment="Left" Margin="53,178,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.Column="2"/>
+                <Label Content="T3 (x)" HorizontalAlignment="Left" Margin="16,121,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.ColumnSpan="3"/>
+                <Label Content="T3 (y)" HorizontalAlignment="Left" Margin="53,121,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.Column="2"/>
+                <Label Content="T2 (x)" HorizontalAlignment="Left" Margin="16,66,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.ColumnSpan="3"/>
+                <Label Content="T2 (y)" HorizontalAlignment="Left" Margin="53,66,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.Column="2"/>
+                <Label Content="T1 (x)" HorizontalAlignment="Left" Margin="16,10,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.ColumnSpan="3"/>
+                <Label Content="T1 (y)" HorizontalAlignment="Left" Margin="53,10,0,0" VerticalAlignment="Top" Height="28" Width="62" Grid.Column="2"/>
+            </Grid>
+        </GroupBox>
+        <Canvas x:Name="canvas1" HorizontalAlignment="Left" Height="633" VerticalAlignment="Center" Width="982" Grid.ColumnSpan="7" Grid.Column="1" Margin="7,0,0,0"/>
+        <Label x:Name="lbRezultat" Content="" HorizontalAlignment="Left" Margin="885,125,0,0" VerticalAlignment="Top" Grid.Column="7"/>
     </Grid>
 </Window>
