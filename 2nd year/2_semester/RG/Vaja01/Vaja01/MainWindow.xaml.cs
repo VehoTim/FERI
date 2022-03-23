@@ -116,7 +116,7 @@ namespace Vaja01
 
                 Rectangle tocka1 = new Rectangle();
 
-                tocka1.Width = 5; tocka1.Height = 5;
+                tocka1.Width = 3; tocka1.Height = 3;
 
                 tocka1.Fill = Brushes.Black;
                 tocka1.Stroke = Brushes.Black;
@@ -127,7 +127,7 @@ namespace Vaja01
 
                 Rectangle tocka2 = new Rectangle();
 
-                tocka2.Width = 5; tocka2.Height = 5;
+                tocka2.Width = 3; tocka2.Height = 3;
 
                 tocka2.Fill = Brushes.Black;
                 tocka2.Stroke = Brushes.Black;
@@ -178,7 +178,7 @@ namespace Vaja01
 
                 Rectangle tocka1 = new Rectangle();
 
-                tocka1.Width = 5; tocka1.Height = 5;
+                tocka1.Width = 3; tocka1.Height = 3;
 
                 tocka1.Fill = Brushes.Black;
                 tocka1.Stroke = Brushes.Black;
@@ -189,7 +189,7 @@ namespace Vaja01
 
                 Rectangle tocka2 = new Rectangle();
 
-                tocka2.Width = 5; tocka2.Height = 5;
+                tocka2.Width = 3; tocka2.Height = 3;
 
                 tocka2.Fill = Brushes.Black;
                 tocka2.Stroke = Brushes.Black;
@@ -200,7 +200,7 @@ namespace Vaja01
 
                 Rectangle tocka3 = new Rectangle();
 
-                tocka3.Width = 5; tocka3.Height = 5;
+                tocka3.Width = 3; tocka3.Height = 3;
 
                 tocka3.Fill = Brushes.Black;
                 tocka3.Stroke = Brushes.Black;
@@ -216,7 +216,7 @@ namespace Vaja01
                 Line linija = new Line();
                 linija.Stroke = Brushes.Black;
                 linija.StrokeThickness = 1;
-                linija.Fill = System.Windows.Media.Brushes.Black;
+                linija.Fill = Brushes.Black;
 
                 linija.X1 = T2.X;
                 linija.Y1 = T2.Y;
@@ -233,6 +233,8 @@ namespace Vaja01
                 //Nastavitev vektorjev V1, V2 in Vn
                 Vector v1 = T3 - T2;
                 Vector v2 = T1 - T2;
+
+
 
                 Vector vn = v1;
                 vn.Normalize();
@@ -264,7 +266,7 @@ namespace Vaja01
                 //narisemo tocko na daljici najblizje T1
                 Rectangle rectangle2 = new Rectangle();
 
-                rectangle2.Width = 5; rectangle2.Height = 5;
+                rectangle2.Width = 3; rectangle2.Height = 3;
 
                 rectangle2.Fill = Brushes.Red;
                 rectangle2.Stroke = Brushes.Red;
@@ -295,7 +297,14 @@ namespace Vaja01
                 double razdalja = Math.Sqrt(Math.Pow((T1.X - Tp.X), 2)
                                           + Math.Pow((T1.Y - Tp.Y), 2));
 
-                lbRezultat.Content = "Razdalja: " + razdalja;
+                if(v1 * v2 < 0)
+                {
+
+                    lbRezultat.Content = "Razdalja: " + razdalja + ", je na levi strani";
+
+                }
+                else if(v1 * v2 > 0)  lbRezultat.Content = "Razdalja: " + razdalja + ", je na desni strani";
+                else lbRezultat.Content = "Razdalja: " + razdalja + ", je na daljici";
 
                 //------------------------------------
             }
@@ -325,7 +334,7 @@ namespace Vaja01
 
                 Rectangle tocka1 = new Rectangle();
 
-                tocka1.Width = 5; tocka1.Height = 5;
+                tocka1.Width = 3; tocka1.Height = 3;
 
                 tocka1.Fill = Brushes.Black;
                 tocka1.Stroke = Brushes.Black;
@@ -336,7 +345,7 @@ namespace Vaja01
 
                 Rectangle tocka2 = new Rectangle();
 
-                tocka2.Width = 5; tocka2.Height = 5;
+                tocka2.Width = 3; tocka2.Height = 3;
 
                 tocka2.Fill = Brushes.Black;
                 tocka2.Stroke = Brushes.Black;
@@ -347,7 +356,7 @@ namespace Vaja01
 
                 Rectangle tocka3 = new Rectangle();
 
-                tocka3.Width = 5; tocka3.Height = 5;
+                tocka3.Width = 3; tocka3.Height = 3;
 
                 tocka3.Fill = Brushes.Black;
                 tocka3.Stroke = Brushes.Black;
@@ -358,7 +367,7 @@ namespace Vaja01
 
                 Rectangle tocka4 = new Rectangle();
 
-                tocka4.Width = 5; tocka4.Height = 5;
+                tocka4.Width = 3; tocka4.Height = 3;
 
                 tocka4.Fill = Brushes.Black;
                 tocka4.Stroke = Brushes.Black;
@@ -374,7 +383,7 @@ namespace Vaja01
                 Line linija = new Line();
                 linija.Stroke = Brushes.Black;
                 linija.StrokeThickness = 1;
-                linija.Fill = System.Windows.Media.Brushes.Black;
+                linija.Fill = Brushes.Black;
 
                 linija.X1 = T1.X;
                 linija.Y1 = T1.Y;
@@ -408,6 +417,28 @@ namespace Vaja01
                 if(A == 0 && B == 0 && D == 0)
                 {
                     lbRezultat.Content = "Daljici sovpadata";
+
+                    List<Point> points = new List<Point>();
+                    points.Add(T1);
+                    points.Add(T2);
+                    points.Add(T3);
+                    points.Add(T4);
+
+                    points.OrderBy(p => p.X).ThenBy(p => p.Y).ToList();
+
+                    Line linija3 = new Line();
+                    linija3.Stroke = Brushes.Orange;
+                    linija3.StrokeThickness = 2;
+                    linija3.Fill = Brushes.Orange;
+
+                    linija3.X1 = points[1].X;
+                    linija3.Y1 = points[1].Y;
+
+                    linija3.X2 = points[2].X;
+                    linija3.Y2 = points[2].Y;
+
+                    canvas1.Children.Add(linija3);
+
                     return;
                 }
                 //Daljici sta vzporedni
@@ -437,7 +468,7 @@ namespace Vaja01
 
                     Rectangle tockaP = new Rectangle();
 
-                    tockaP.Width = 5; tockaP.Height = 5;
+                    tockaP.Width = 3; tockaP.Height = 3;
 
                     tockaP.Fill = Brushes.Red;
                     tockaP.Stroke = Brushes.Red;
