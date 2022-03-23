@@ -100,8 +100,62 @@ namespace Vaja01
                 lbRezultat.Content = "Manhattan: " + manhattan +
                                      "\nEvklid: " + evklid +
                                      "\nChebyshev: " + chebyshev;
-            }
 
+                //tocke
+                Point T1 = new Point();
+                T1.X = double.Parse(txtBoxT1x.Text);
+                T1.Y = double.Parse(txtBoxT1y.Text);
+
+                Point T2 = new Point();
+                T2.X = double.Parse(txtBoxT2x.Text);
+                T2.Y = double.Parse(txtBoxT2y.Text);
+
+                //------------------------------------
+
+                //Izris teh tock
+
+                Rectangle tocka1 = new Rectangle();
+
+                tocka1.Width = 5; tocka1.Height = 5;
+
+                tocka1.Fill = Brushes.Black;
+                tocka1.Stroke = Brushes.Black;
+
+                tocka1.Margin = new Thickness(T1.X, T1.Y, 0, 0);
+
+                canvas1.Children.Add(tocka1);
+
+                Rectangle tocka2 = new Rectangle();
+
+                tocka2.Width = 5; tocka2.Height = 5;
+
+                tocka2.Fill = Brushes.Black;
+                tocka2.Stroke = Brushes.Black;
+
+                tocka2.Margin = new Thickness(T2.X, T2.Y, 0, 0);
+
+                canvas1.Children.Add(tocka2);
+
+                //------------------------------------
+
+                //Povezava T2 in T3
+
+                Line linija = new Line();
+                linija.Stroke = Brushes.Black;
+                linija.StrokeThickness = 1;
+                linija.Fill = Brushes.Black;
+
+                linija.X1 = T1.X;
+                linija.Y1 = T1.Y;
+
+                linija.X2 = T2.X;
+                linija.Y2 = T2.Y;
+
+
+                canvas1.Children.Add(linija);
+
+                //------------------------------------
+            }
             //druga tocka naloge - ena tocka, ena daljicas
             else if(rbOnePointOneLine.IsChecked == true)
             {
@@ -126,8 +180,8 @@ namespace Vaja01
 
                 tocka1.Width = 5; tocka1.Height = 5;
 
-                tocka1.Fill = System.Windows.Media.Brushes.Black;
-                tocka1.Stroke = System.Windows.Media.Brushes.Black;
+                tocka1.Fill = Brushes.Black;
+                tocka1.Stroke = Brushes.Black;
 
                 tocka1.Margin = new Thickness(T1.X, T1.Y, 0, 0);
 
@@ -137,8 +191,8 @@ namespace Vaja01
 
                 tocka2.Width = 5; tocka2.Height = 5;
 
-                tocka2.Fill = System.Windows.Media.Brushes.Black;
-                tocka2.Stroke = System.Windows.Media.Brushes.Black;
+                tocka2.Fill = Brushes.Black;
+                tocka2.Stroke = Brushes.Black;
 
                 tocka2.Margin = new Thickness(T2.X, T2.Y, 0, 0);
 
@@ -374,7 +428,7 @@ namespace Vaja01
                     double x = T1.X + Ua * (T2.X - T1.X);
                     double y = T1.Y + Ua * (T2.Y - T1.Y);
 
-                    lbRezultat.Content = "Daljici se sekata v tocki: " + x + "," + y;
+                    lbRezultat.Content = "Daljici se sekata v tocki: " + x + " ; " + y;
 
 
                     Point Tp = new Point();
@@ -385,12 +439,16 @@ namespace Vaja01
 
                     tockaP.Width = 5; tockaP.Height = 5;
 
-                    tockaP.Fill = System.Windows.Media.Brushes.Red;
-                    tockaP.Stroke = System.Windows.Media.Brushes.Red;
+                    tockaP.Fill = Brushes.Red;
+                    tockaP.Stroke = Brushes.Red;
 
                     tockaP.Margin = new Thickness(Tp.X, Tp.Y, 0, 0);
 
                     canvas1.Children.Add(tockaP);
+                }
+                else
+                {
+                    lbRezultat.Content = "Daljici se ne sekata";
                 }
             }
         }

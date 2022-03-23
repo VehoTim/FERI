@@ -7,18 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="669" Width="1188">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="22*"/>
-            <ColumnDefinition Width="14*"/>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="19*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="1074*"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox HorizontalAlignment="Left" Height="110" Header="GroupBox" Margin="885,10,0,0" VerticalAlignment="Top" Width="180
-                  " Grid.Column="7">
+        <GroupBox HorizontalAlignment="Left" Height="110" Header="GroupBox" Margin="998,10,0,0" VerticalAlignment="Top" Width="180
+                  ">
             <Grid Height="384">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="13*"/>
@@ -29,7 +19,7 @@
                 <RadioButton x:Name="rbTwoLines" Content="Two lines" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Click="checkedChanged" Grid.ColumnSpan="2"/>
             </Grid>
         </GroupBox>
-        <GroupBox HorizontalAlignment="Left" Height="306" Header="GroupBox" Margin="885,337,0,0" VerticalAlignment="Top" Width="180" Grid.Column="7">
+        <GroupBox HorizontalAlignment="Left" Height="306" Header="GroupBox" Margin="998,337,0,0" VerticalAlignment="Top" Width="180">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="17*"/>
@@ -56,6 +46,6 @@
             </Grid>
         </GroupBox>
         <Canvas x:Name="canvas1" HorizontalAlignment="Left" Height="633" VerticalAlignment="Center" Width="982" Grid.ColumnSpan="7" Grid.Column="1" Margin="7,0,0,0"/>
-        <Label x:Name="lbRezultat" Content="" HorizontalAlignment="Left" Margin="885,125,0,0" VerticalAlignment="Top" Grid.Column="7"/>
+        <Label x:Name="lbRezultat" Content="" HorizontalAlignment="Left" Margin="998,125,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
