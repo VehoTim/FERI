@@ -29,3 +29,7 @@ _UpgradeReport_Files/
 _ReSharper.*/
 bin
 obj
+bin/
+obj/
+bin*/
+obj*/
