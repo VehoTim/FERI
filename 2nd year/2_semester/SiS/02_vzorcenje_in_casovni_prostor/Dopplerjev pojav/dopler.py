@@ -57,12 +57,18 @@ if __name__ == '__main__':
 
     sd.play(signal, 44100.0)
     
+    #dodal tole
+    sd.wait()
+    
     #plt.plot(signal)
     #plt.show()
 
     novSignal = dopler_efekt_mono(signal, 44100.0, 70, 50)
     
     sd.play(novSignal, 44100.0)
+
+    #dodal tole
+    sd.wait()
     
     #plt.plot(novSignal)
     #plt.show()
