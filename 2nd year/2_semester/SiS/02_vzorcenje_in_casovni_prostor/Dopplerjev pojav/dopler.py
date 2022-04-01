@@ -53,23 +53,21 @@ if __name__ == '__main__':
 
     times = np.arange(int(44100.0*2.0)) / 44100.0
 
-    signal = np.sin(2.0*np.pi*5000.0*times)
+    signal = np.sin(2.0*np.pi*2000.0*times)
 
-    sd.play(signal, 44100.0)
+    #sd.play(signal, 44100.0)
     
-    #dodal tole
-    sd.wait()
+    #sd.wait()
     
-    #plt.plot(signal)
-    #plt.show()
+    plt.plot(signal)
+    plt.show()
 
     novSignal = dopler_efekt_mono(signal, 44100.0, 70, 50)
     
-    sd.play(novSignal, 44100.0)
+    #sd.play(novSignal, 44100.0)
 
-    #dodal tole
-    sd.wait()
+    #sd.wait()
     
-    #plt.plot(novSignal)
-    #plt.show()
+    plt.plot(novSignal)
+    plt.show()
 
