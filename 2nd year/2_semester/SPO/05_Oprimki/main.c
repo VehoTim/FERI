@@ -7,12 +7,12 @@
 
 int main(int argc, char *argv[]){
     int id = 0;
-    char* tel;
-    char* ime;
-    char* priimek;
-    char* dan;
-    char* mesec;
-    char* leto;
+    char* tel = NULL;
+    char* ime = NULL;
+    char* priimek = NULL;
+    char* dan = NULL;
+    char* mesec = NULL;
+    char* leto = NULL;
 
     int oprimek = -1;
 
@@ -70,6 +70,7 @@ int main(int argc, char *argv[]){
     }
 
     if(tel != NULL && ime != NULL && priimek != NULL && dan != NULL && mesec != NULL && leto != NULL){
+        
 
         off_t fsize = lseek(oprimek,0,SEEK_END);
         
@@ -106,14 +107,6 @@ int main(int argc, char *argv[]){
 
         for (int i = 0; i < 20; i++){
             if(tel[i] != '\0'){
-                /*byte = charToBin(tel[i]);
-                printf("%c = ", tel[i]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
 
                 buffer[i + 1] = tel[i];
 
@@ -121,7 +114,7 @@ int main(int argc, char *argv[]){
             }
             else{
 
-                for (size_t j = index; j < 20; j++)
+                for (int j = index; j < 20; j++)
                 {
                     index++;
                     buffer[j + 1] = '\0';
@@ -130,16 +123,8 @@ int main(int argc, char *argv[]){
             }
         }
         int por = index;
-        for (size_t i = por; i < por + 20; i++){
+        for (int i = por; i < por + 20; i++){
             if(ime[i - por] != '\0'){
-                /*byte = charToBin(ime[i - por]);
-                printf("%c = ", ime[i - por]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
 
                 buffer[i + 1] = ime[i - por];
 
@@ -155,23 +140,15 @@ int main(int argc, char *argv[]){
             }
         }
         por = index;
-        for (size_t i = por; i < por + 20; i++){
+        for (int i = por; i < por + 20; i++){
             if(priimek[i - por] != '\0'){
-                /*byte = charToBin(priimek[i - por]);
-                printf("%c = ", priimek[i - por]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
 
                 buffer[i + 1] = priimek[i - por];
 
                 index++;
             }
             else{
-                for (size_t j = index; j < por + 20; j++)
+                for (int j = index; j < por + 20; j++)
                 {
                     index++;
                     buffer[j + 1] = '\0';
@@ -181,17 +158,8 @@ int main(int argc, char *argv[]){
         }
         por = index;
         uint8_t pad;
-        for (size_t i = por; i < por + 20; i++){
+        for (int i = por; i < por + 20; i++){
             if(dan[i - por] != '\0'){
-
-                /*byte = charToBin(dan[i - por]);
-                printf("%c = ", dan[i - por]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
                 if(i == por){
                     buffer[i + 1] = '0';
                     pad = dan[i - por];
@@ -216,17 +184,8 @@ int main(int argc, char *argv[]){
             }
         }
         por = index;
-        for (size_t i = por; i < por + 20; i++){
+        for (int i = por; i < por + 20; i++){
             if(mesec[i - por] != '\0'){
-
-                /*byte = charToBin(dan[i - por]);
-                printf("%c = ", dan[i - por]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
                 if(i == por){
                     buffer[i + 1] = '0';
                     pad = mesec[i - por];
@@ -251,16 +210,8 @@ int main(int argc, char *argv[]){
             }
         }
         por = index;
-        for (size_t i = por; i < por + 5; i++){
+        for (int i = por; i < por + 5; i++){
             if(leto[i - por] != '\0'){
-                /*byte = charToBin(mesec[i - por]);
-                printf("%c = ", mesec[i - por]);
-                for (int j = 0; j < 8; j++)
-                {
-                    printf("%c " , byte[j]);
-                    buffer[i + 1 + j] = byte[j];
-                }
-                printf("\n");*/
 
                 buffer[i + 1] = leto[i - por];
 
@@ -291,9 +242,6 @@ int main(int argc, char *argv[]){
         //iscemo
     }*/
     else{
-
-        printf("Tukaj");
-
         off_t fsize = lseek(oprimek, 0, SEEK_END);
 
         lseek(oprimek, 0, 0);
