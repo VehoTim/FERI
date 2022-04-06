@@ -1,8 +1,9 @@
 import numpy as np
 
 def analiziraj_vzorcevalno_mono(signal, dominantna_frekvenca):
-    Fvz = np.fft.fftn()
-    Fvz = dominantna_frekvenca / ( / signal.shape[0])
+    X = np.fft.fft(signal, axis=0)
+    n = np.argmax(X)
+    Fvz = dominantna_frekvenca / (n / X.shape[0])
     return Fvz
 
 if __name__ == '__main__':
