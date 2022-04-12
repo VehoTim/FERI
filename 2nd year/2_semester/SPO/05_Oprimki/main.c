@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
     for (int i = 0; i < argc; i++)
     {
         if(strcmp(argv[i], "-id") == 0){
-            id = (int)argv[i + 1];
+            id = atoi(argv[i + 1]);
             i++;
         }
         if(strcmp(argv[i], "-tel") == 0){
@@ -233,18 +233,288 @@ int main(int argc, char *argv[]){
     else if(id != 0){
         if(tel != NULL || ime != NULL || priimek != NULL || dan != NULL || mesec != NULL || leto != NULL){
             //urejamo
+
+            off_t fsize = lseek(oprimek, 0, SEEK_END);
+            lseek(oprimek, 0, 0);
+            uint8_t *branje = (uint8_t*)malloc(fsize);
+            read(oprimek, branje, fsize);
+            lseek(oprimek, 0, 0);
+
+            int iskaniI = id;
+
+            for (int i = 0; i < fsize - 1; i++){
+                if(branje[i] == ';'){
+                    iskaniI--;
+                    if(iskaniI == 1){
+                        int j = i + 2;
+
+                        if(tel != NULL){
+                            for (int k = 0; k < 20; k++){
+                                if(tel[k] != '\0'){
+                                    branje[j] = tel[k];
+                                    j++;
+                                }
+                                else{
+                                    for (int l = k; l < 20; l++){
+                                        branje[j] = '\0';
+                                        j++;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else j = j + 20;
+                        
+                        
+                        if(ime != NULL){
+                            for (int k = 0; k < 20; k++){
+                                if(ime[k] != '\0'){
+                                    branje[j] = ime[k];
+                                    j++;
+                                }
+                                else{
+                                    for (int l = k; l < 20; l++){
+                                        branje[j] = '\0';
+                                        j++;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else j = j + 20;
+                        
+                        if(priimek != NULL){
+                            for (int k = 0; k < 20; k++){
+                                if(priimek[k] != '\0'){
+                                    branje[j] = priimek[k];
+                                    j++;
+                                }
+                                else{
+                                    for (int l = k; l < 20; l++){
+                                        branje[j] = '\0';
+                                        j++;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        else j = j + 20;
+                        
+                        uint8_t pad;
+                        if(dan != NULL){
+                            for (int k = 0; k < 3; k++){
+                                if(dan[k] != '\0'){
+
+                                    printf("k: %d", k);
+
+                                    printf("j: %d", j);
+
+                                    if(k == 0){
+                                        branje[j] = '0';
+                                        pad = dan[k];
+                                        j++;
+                                    }
+                                    else{
+                                        branje[j] = dan[k];
+                                        branje[j - 1] = pad;
+                                        j++;
+                                    }
+                                }
+                                else {
+                                    if((k) == 1){
+                                        branje[j] = pad;
+                                        j++;
+                                        
+                                        branje[j] = '.';
+                                        j++;
+                                        break;
+                                    }
+                                    else branje[j] = '.';
+                                    j++;
+                                    break;
+                                }
+                            }
+                        }
+                        else j = j + 3;
+                        
+                        
+                        if(mesec != NULL){
+                            for (int k = 0; k < 3; k++){
+                                if(mesec[k] != '\0'){
+                                    if(k == 0){
+                                        branje[j] = '0';
+                                        pad = mesec[k];
+                                    }
+                                    else{
+                                        branje[j] = mesec[k];
+                                        branje[j - 1] = pad;
+                                    }
+                                    j++;
+                                }
+                                else {
+                                    if((k) == 1){
+                                        branje[j] = pad;
+                                        j++;
+                                        
+                                        branje[j] = '.';
+                                        j++;
+                                        break;
+                                    }
+                                    else branje[j] = '.';
+                                    j++;
+                                    break;
+                                }
+                            }
+                        }
+                        else j = j + 3;
+
+                        
+                        if(leto != NULL){
+                            for (int k = 0; k < 5; k++){
+                                if(leto[k] != '\0'){
+
+                                    branje[j] = leto[k];
+
+                                    j++;
+                                }
+                                else {
+                                    j++;
+                                    break;
+                                }
+                            }
+                        }
+
+                        j = j + 5;
+                        
+                        write(oprimek, branje, fsize);
+                        
+                        break;
+                    }
+                }
+            }
+            free(branje);
         }
         else{
             //brisemo
+            off_t fsize = lseek(oprimek, 0, SEEK_END);
+            lseek(oprimek, 0, 0);
+            uint8_t *branje = (uint8_t*)malloc(fsize);
+            read(oprimek, branje, fsize);
+            lseek(oprimek, 0, 0);
+
+            int iskaniI = id;
+
+            for (int i = 0; i < fsize - 1; i++){
+                if(branje[i] == ';'){
+                    iskaniI--;
+                    if(iskaniI == 1){
+                        int j = i + 2;
+                        while (branje[j] != ';'){
+                            branje[j] = '\0';
+                            j++;
+                        }
+                        
+                        write(oprimek, branje, fsize);
+                        
+                        break;
+                    }
+                }
+            }
+            
         }
     }
-    /*else if(ime != NULL || priimek != NULL){
+    else if(ime != NULL || priimek != NULL){
         //iscemo
-    }*/
-    else{
+
         off_t fsize = lseek(oprimek, 0, SEEK_END);
 
         lseek(oprimek, 0, 0);
+
+        int loop = 0;
+
+        while (loop < fsize - 1){
+
+            char* cur = malloc(72);
+
+            read(oprimek, cur, 72);
+
+            int pos = 0;
+            int k = 20;
+
+            if(ime != NULL) {
+                k = strlen(ime);
+                for (int i = 21; i < 41; i++){
+                    if(ime[pos] == cur[i]) {
+                        pos++;
+                        if(pos == k) break;
+                    }
+                    else pos = 0;
+                }
+                //izpisemo tega
+            }
+
+            if(pos == k){
+                uint16_t beri = 1;
+                printf("%d\t", cur[0]);
+                uint8_t tab = 20;
+                while(beri < 72){
+                    printf("%c", cur[beri]);
+                    beri++;
+                    tab--;
+                    if(tab == 0){
+                        printf("\t");
+                        tab = 20;
+                    }
+                }
+                printf("\n");
+
+                loop = loop + 72;
+                continue;
+            }
+
+            k = 20;
+            pos = 0;
+
+            if(priimek != NULL) {
+                k = strlen(priimek);
+                for (int i = 41; i < 61; i++){
+                    if(priimek[pos] == cur[i]) {
+                        pos++;
+                        if(pos == k) break;
+                    }
+                    else pos = 0;
+                }
+                //izpisemo tega
+            }
+            if(pos == k){
+                uint16_t beri = 1;
+                printf("%d\t", cur[0]);
+                uint8_t tab = 20;
+                while(beri < 72){
+                    printf("%c", cur[beri]);
+                    beri++;
+                    tab--;
+                    if(tab == 0){
+                        printf("\t");
+                        tab = 20;
+                    }
+                }
+                printf("\n");
+
+                loop = loop + 72;
+                continue;
+            }
+            free(cur);
+
+            loop = loop + 72;
+        }
+        
+        
+    }
+    else{
+        off_t fsize = lseek(oprimek, 0, SEEK_END);
+
+        lseek(oprimek, 0, SEEK_SET);
         
         if(fsize != 0){
             uint8_t *branje = (uint8_t*)malloc(fsize);
