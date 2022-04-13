@@ -2,11 +2,11 @@ namespace Vaja02___Minimax_alfa_beta
 {
     public partial class Form1 : Form
     {
-        public struct Stanje
+        /*public struct Stanje
         {
             public int h;
             public int[] stanjePolja;
-        };
+        };*/
 
 
         public Form1()
@@ -14,7 +14,14 @@ namespace Vaja02___Minimax_alfa_beta
             InitializeComponent();
         }
 
-        int naVrsti = 1;
+
+        struct Stanje
+        {
+            public int hev;
+            public int pos;
+        }
+
+        //int naVrsti = 1;
 
         int[,] zmagovalnePozicije = new int[8, 3] {
             { 0, 1, 2 },
@@ -38,6 +45,8 @@ namespace Vaja02___Minimax_alfa_beta
         {
             int hevristika = 0;
             int bestHev = 0;
+
+            int bestA = 0;
 
             int doZmage = 0;
 
@@ -63,7 +72,7 @@ namespace Vaja02___Minimax_alfa_beta
 
                 if (doZmage == 3)
                 {
-                    bestHev = 100;
+                    return 100;
                     //return 100;
                     //zmagal je
                 }
@@ -77,9 +86,7 @@ namespace Vaja02___Minimax_alfa_beta
                 doZmage = 0;
             }
 
-            if (bestHev == 100) return 100;
-            else if (bestHev == 10 && poteza == -1) hevristika = 10;
-            else return 10;
+            if (bestHev == 10 && poteza == -1) bestA = 10;
 
 
             for (int i = 0; i < 8; i++)
@@ -104,7 +111,7 @@ namespace Vaja02___Minimax_alfa_beta
 
                 if (doZmage == 3)
                 {
-                    bestHev = -100;
+                    return -100;
                     //zmagal je
                 }
                 else if (doZmage == 2)
@@ -115,9 +122,8 @@ namespace Vaja02___Minimax_alfa_beta
                 doZmage = 0;
             }
 
-            if (bestHev == -100) return -100;
-            else if (bestHev == -10 && poteza == 1) hevristika = -10;
-            else return -10;
+            if (bestHev == -10 && poteza == 1) return -10;
+            else if(bestA == 10 && poteza == -1) return 10;
 
 
             return hevristika;
@@ -133,21 +139,16 @@ namespace Vaja02___Minimax_alfa_beta
         }
 
 
-        struct Pomoc
+        Stanje minmaxAB(int[] trenPolozaj, int ig, int d,/*ref*/ int a,/*ref*/ int b, int index)
         {
-            public int hev;
-            public int pos;
-        }
+            Stanje p = new Stanje();
+            Stanje bestP = new Stanje();
 
+            int o = hev(ig, trenPolozaj);
 
-        Pomoc alfaBeta(int[] trenPolozaj, int ig, int d,ref int a,ref int b, int index)
-        {
-            Pomoc p = new Pomoc();
-            Pomoc bestP = new Pomoc();
-
-            if (jeList(trenPolozaj) || d == 0)
+            if (jeList(trenPolozaj) || d == 0 || o == 100 || o == -100 || stPotez == 0)
             {
-                p.hev = hev(ig, trenPolozaj);
+                p.hev = o;
                 p.pos = index;
                 return p;
             }
@@ -161,7 +162,7 @@ namespace Vaja02___Minimax_alfa_beta
                 {
                     tmp[i] = ig;
 
-                    p = alfaBeta(tmp, -ig, d - 1,ref a,ref b, i);
+                    p = minmaxAB(tmp, -ig, d - 1,/*ref*/ a,/*ref*/ b, i);
                     if (index != 10) tmp[p.pos] = 0;
                     else bestP = p;
                     if (ig == 1 && p.hev > a)
@@ -180,12 +181,12 @@ namespace Vaja02___Minimax_alfa_beta
                             bestP = p;
                         }
                     }
-                    if (a >= b) return bestP;
+
+                    if(a >= b || (bestP.hev == 100 && ig == 1) || (bestP.hev == -100 && ig == -1) ) return bestP;
                 }
             }
             return bestP;
         }
-
 
 
         private void button_Click(object sender, EventArgs e)
@@ -193,12 +194,17 @@ namespace Vaja02___Minimax_alfa_beta
             //if (naVrsti == 1)
             //{
 
+
+            int tezavnost = int.Parse(comboBox1.Text);
+
             ((Button)sender).Text = "X";
-            ((Button)sender).Click -= button_Click;
+            //((Button)sender).Click -= button_Click;
+            ((Button)sender).Enabled = false;
+            ((Button)sender).BackColor = Color.LightGray;
             int pos = ((Button)sender).Name[6] - '0';
             stPotez--;
             globalPoz[pos] = 1;
-            label1.Text = hev(naVrsti, globalPoz).ToString();
+            //label1.Text = hev(naVrsti, globalPoz).ToString();
 
             //naVrsti = -1;
 
@@ -207,17 +213,26 @@ namespace Vaja02___Minimax_alfa_beta
 
             if (hev(1, globalPoz) == 100)
             {
-                /*button0.Enabled = false;
+                button0.Enabled = false;
+                button0.BackColor = Color.LightGray;
                 button1.Enabled = false;
+                button1.BackColor = Color.LightGray;
                 button2.Enabled = false;
+                button2.BackColor = Color.LightGray;
                 button3.Enabled = false;
+                button3.BackColor = Color.LightGray;
                 button4.Enabled = false;
+                button4.BackColor = Color.LightGray;
                 button5.Enabled = false;
+                button5.BackColor = Color.LightGray;
                 button6.Enabled = false;
+                button6.BackColor = Color.LightGray;
                 button7.Enabled = false;
-                button8.Enabled = false;*/
+                button7.BackColor = Color.LightGray;
+                button8.Enabled = false;
+                button8.BackColor = Color.LightGray;
 
-                button0.Click -= button_Click;
+                /*button0.Click -= button_Click;
                 button1.Click -= button_Click;
                 button2.Click -= button_Click;
                 button3.Click -= button_Click;
@@ -225,10 +240,10 @@ namespace Vaja02___Minimax_alfa_beta
                 button5.Click -= button_Click;
                 button6.Click -= button_Click;
                 button7.Click -= button_Click;
-                button8.Click -= button_Click;
+                button8.Click -= button_Click;*/
 
 
-                label1.Text = "Damn wp";
+                label1.Text = "Zmagal si";
 
                 zmage++;
                 labelZmage.Text = "Zmage: " + zmage;
@@ -239,12 +254,12 @@ namespace Vaja02___Minimax_alfa_beta
             {
 
 
-                Pomoc p = new Pomoc();
+                Stanje p = new Stanje();
 
                 int a = int.MinValue;
                 int b = int.MaxValue;
 
-                p = alfaBeta(globalPoz, -1, 3, ref a, ref b, 10);
+                p = minmaxAB(globalPoz, -1, tezavnost,/*ref*/ a,/*ref*/ b, 10);
 
                 stPotez--;
 
@@ -254,69 +269,88 @@ namespace Vaja02___Minimax_alfa_beta
                         {
                             globalPoz[p.pos] = -1;
                             button0.Text = "O";
-                            button0.Click -= button_Click;
+                            //button0.Click -= button_Click;
+                            button0.Enabled = false;
+                            button0.BackColor = Color.LightGray;
                             break;
                         }
                     case 1:
                         {
                             globalPoz[p.pos] = -1;
                             button1.Text = "O";
-                            button1.Click -= button_Click;
+                            //button1.Click -= button_Click;
+                            button1.Enabled = false;
+                            button1.BackColor = Color.LightGray;
                             break;
                         }
                     case 2:
                         {
                             globalPoz[p.pos] = -1;
                             button2.Text = "O";
-                            button2.Click -= button_Click;
+                            //button2.Click -= button_Click;
+                            button2.Enabled = false;
+                            button2.BackColor = Color.LightGray;
                             break;
                         }
                     case 3:
                         {
                             globalPoz[p.pos] = -1;
                             button3.Text = "O";
-                            button3.Click -= button_Click;
+                            //button3.Click -= button_Click;
+                            button3.Enabled = false;
+                            button3.BackColor = Color.LightGray;
                             break;
                         }
                     case 4:
                         {
                             globalPoz[p.pos] = -1;
                             button4.Text = "O";
-                            button4.Click -= button_Click;
+                            //button4.Click -= button_Click;
+                            button4.Enabled = false;
+                            button4.BackColor = Color.LightGray;
                             break;
                         }
                     case 5:
                         {
                             globalPoz[p.pos] = -1;
                             button5.Text = "O";
-                            button5.Click -= button_Click;
+                            //button5.Click -= button_Click;
+                            button5.Enabled = false;
+                            button5.BackColor = Color.LightGray;
                             break;
                         }
                     case 6:
                         {
                             globalPoz[p.pos] = -1;
                             button6.Text = "O";
-                            button6.Click -= button_Click;
+                            //button6.Click -= button_Click;
+                            button6.Enabled = false;
+                            button6.BackColor = Color.LightGray;
                             break;
                         }
                     case 7:
                         {
                             globalPoz[p.pos] = -1;
                             button7.Text = "O";
-                            button7.Click -= button_Click;
+                            //button7.Click -= button_Click;
+                            button7.Enabled = false;
+                            button7.BackColor = Color.LightGray;
                             break;
                         }
                     case 8:
                         {
                             globalPoz[p.pos] = -1;
                             button8.Text = "O";
-                            button8.Click -= button_Click;
+                            //button8.Click -= button_Click;
+                            button8.Enabled = false;
+                            button8.BackColor = Color.LightGray;
                             break;
                         }
                 }
 
                 if(hev(-1, globalPoz) == -100)
                 {
+                    /*
                     button0.Click -= button_Click;
                     button1.Click -= button_Click;
                     button2.Click -= button_Click;
@@ -325,8 +359,28 @@ namespace Vaja02___Minimax_alfa_beta
                     button5.Click -= button_Click;
                     button6.Click -= button_Click;
                     button7.Click -= button_Click;
-                    button8.Click -= button_Click;
-                    label1.Text = "Zguba";
+                    button8.Click -= button_Click;*/
+
+                    button0.Enabled = false;
+                    button0.BackColor = Color.LightGray;
+                    button1.Enabled = false;
+                    button1.BackColor = Color.LightGray;
+                    button2.Enabled = false;
+                    button2.BackColor = Color.LightGray;
+                    button3.Enabled = false;
+                    button3.BackColor = Color.LightGray;
+                    button4.Enabled = false;
+                    button4.BackColor = Color.LightGray;
+                    button5.Enabled = false;
+                    button5.BackColor = Color.LightGray;
+                    button6.Enabled = false;
+                    button6.BackColor = Color.LightGray;
+                    button7.Enabled = false;
+                    button7.BackColor = Color.LightGray;
+                    button8.Enabled = false;
+                    button8.BackColor = Color.LightGray;
+
+                    label1.Text = "Zgubil si";
 
                     porazi++;
                     labelPoraz.Text = "Porazi: " + porazi;
@@ -359,28 +413,187 @@ namespace Vaja02___Minimax_alfa_beta
 
         private void buttonRetry_Click(object sender, EventArgs e)
         {
-            button0.Click += button_Click;
-            button1.Click += button_Click;
-            button2.Click += button_Click;
-            button3.Click += button_Click;
-            button4.Click += button_Click;
-            button5.Click += button_Click;
-            button6.Click += button_Click;
-            button7.Click += button_Click;
-            button8.Click += button_Click;
-            label1.Text = "";
+            
 
-            button0.Text = "";
-            button1.Text = "";
-            button2.Text = "";
-            button3.Text = "";
-            button4.Text = "";
-            button5.Text = "";
-            button6.Text = "";
-            button7.Text = "";
-            button8.Text = "";
+            int tezavnost = int.Parse(comboBox1.Text);
 
-            globalPoz = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            if(stPotez == 9)
+            {
+                Stanje p = new Stanje();
+
+                int a = int.MinValue;
+                int b = int.MaxValue;
+
+                p = minmaxAB(globalPoz, -1, tezavnost,/*ref*/ a,/*ref*/ b, 10);
+
+                stPotez--;
+
+                switch (p.pos)
+                {
+                    case 0:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button0.Text = "O";
+                            //button0.Click -= button_Click;
+                            button0.Enabled = false;
+                            button0.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 1:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button1.Text = "O";
+                            //button1.Click -= button_Click;
+                            button1.Enabled = false;
+                            button1.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 2:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button2.Text = "O";
+                            //button2.Click -= button_Click;
+                            button2.Enabled = false;
+                            button2.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 3:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button3.Text = "O";
+                            //button3.Click -= button_Click;
+                            button3.Enabled = false;
+                            button3.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 4:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button4.Text = "O";
+                            //button4.Click -= button_Click;
+                            button4.Enabled = false;
+                            button4.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 5:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button5.Text = "O";
+                            //button5.Click -= button_Click;
+                            button5.Enabled = false;
+                            button5.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 6:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button6.Text = "O";
+                            //button6.Click -= button_Click;
+                            button6.Enabled = false;
+                            button6.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 7:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button7.Text = "O";
+                            //button7.Click -= button_Click;
+                            button7.Enabled = false;
+                            button7.BackColor = Color.LightGray;
+                            break;
+                        }
+                    case 8:
+                        {
+                            globalPoz[p.pos] = -1;
+                            button8.Text = "O";
+                            //button8.Click -= button_Click;
+                            button8.Enabled = false;
+                            button8.BackColor = Color.LightGray;
+                            break;
+                        }
+                }
+
+                if (hev(-1, globalPoz) == -100)
+                {
+                    /*
+                    button0.Click -= button_Click;
+                    button1.Click -= button_Click;
+                    button2.Click -= button_Click;
+                    button3.Click -= button_Click;
+                    button4.Click -= button_Click;
+                    button5.Click -= button_Click;
+                    button6.Click -= button_Click;
+                    button7.Click -= button_Click;
+                    button8.Click -= button_Click;*/
+
+                    button0.Enabled = false;
+                    button0.BackColor = Color.LightGray;
+                    button1.Enabled = false;
+                    button1.BackColor = Color.LightGray;
+                    button2.Enabled = false;
+                    button2.BackColor = Color.LightGray;
+                    button3.Enabled = false;
+                    button3.BackColor = Color.LightGray;
+                    button4.Enabled = false;
+                    button4.BackColor = Color.LightGray;
+                    button5.Enabled = false;
+                    button5.BackColor = Color.LightGray;
+                    button6.Enabled = false;
+                    button6.BackColor = Color.LightGray;
+                    button7.Enabled = false;
+                    button7.BackColor = Color.LightGray;
+                    button8.Enabled = false;
+                    button8.BackColor = Color.LightGray;
+
+                    label1.Text = "Zgubil si";
+
+                    porazi++;
+                    labelPoraz.Text = "Porazi: " + porazi;
+
+                    stPotez = 9;
+                }
+            }
+            else
+            {
+
+                /*button0.Click += button_Click;
+                button1.Click += button_Click;
+                button2.Click += button_Click;
+                button3.Click += button_Click;
+                button4.Click += button_Click;
+                button5.Click += button_Click;
+                button6.Click += button_Click;
+                button7.Click += button_Click;
+                button8.Click += button_Click;*/
+
+                button0.Enabled = true;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+                button5.Enabled = true;
+                button6.Enabled = true;
+                button7.Enabled = true;
+                button8.Enabled = true;
+
+
+                label1.Text = "";
+
+                button0.Text = "";
+                button1.Text = "";
+                button2.Text = "";
+                button3.Text = "";
+                button4.Text = "";
+                button5.Text = "";
+                button6.Text = "";
+                button7.Text = "";
+                button8.Text = "";
+
+                stPotez = 9;
+
+                globalPoz = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            }
         }
     }
 }

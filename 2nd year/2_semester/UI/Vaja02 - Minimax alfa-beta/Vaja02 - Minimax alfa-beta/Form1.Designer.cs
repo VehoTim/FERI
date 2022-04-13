@@ -42,10 +42,12 @@
             this.labelZmage = new System.Windows.Forms.Label();
             this.labelIzenaceno = new System.Windows.Forms.Label();
             this.labelPoraz = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button0
             // 
+            this.button0.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button0.Location = new System.Drawing.Point(47, 83);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(103, 90);
@@ -55,6 +57,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button1.Location = new System.Drawing.Point(156, 83);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 90);
@@ -64,6 +67,7 @@
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button2.Location = new System.Drawing.Point(265, 83);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(103, 90);
@@ -73,6 +77,7 @@
             // 
             // button3
             // 
+            this.button3.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button3.Location = new System.Drawing.Point(47, 179);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 90);
@@ -82,6 +87,7 @@
             // 
             // button4
             // 
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button4.Location = new System.Drawing.Point(156, 179);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(103, 90);
@@ -91,6 +97,7 @@
             // 
             // button5
             // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button5.Location = new System.Drawing.Point(265, 179);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(103, 90);
@@ -100,6 +107,7 @@
             // 
             // button6
             // 
+            this.button6.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button6.Location = new System.Drawing.Point(47, 275);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(103, 90);
@@ -109,6 +117,7 @@
             // 
             // button7
             // 
+            this.button7.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button7.Location = new System.Drawing.Point(156, 275);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(103, 90);
@@ -118,6 +127,7 @@
             // 
             // button8
             // 
+            this.button8.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button8.Location = new System.Drawing.Point(265, 275);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(103, 90);
@@ -170,11 +180,31 @@
             this.labelPoraz.TabIndex = 13;
             this.labelPoraz.Text = "Poraz: 0";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBox1.Location = new System.Drawing.Point(128, 25);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(57, 23);
+            this.comboBox1.TabIndex = 15;
+            this.comboBox1.Text = "3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 442);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelPoraz);
             this.Controls.Add(this.labelIzenaceno);
             this.Controls.Add(this.labelZmage);
@@ -189,6 +219,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button0);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -212,5 +243,6 @@
         private Label labelZmage;
         private Label labelIzenaceno;
         private Label labelPoraz;
+        private ComboBox comboBox1;
     }
 }

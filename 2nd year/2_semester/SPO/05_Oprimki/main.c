@@ -4,9 +4,24 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
+
+char * toArray(int number)
+{
+    int n = log10(number) + 1;
+    int i;
+    char *numberArray = calloc(n, sizeof(char));
+    for (i = n-1; i >= 0; --i, number /= 10)
+    {
+        numberArray[i] = (number % 10) + '0';
+    }
+    return numberArray;
+}
 
 int main(int argc, char *argv[]){
     int id = 0;
+
+    char* idArr = NULL;
     char* tel = NULL;
     char* ime = NULL;
     char* priimek = NULL;
@@ -41,6 +56,7 @@ int main(int argc, char *argv[]){
     {
         if(strcmp(argv[i], "-id") == 0){
             id = atoi(argv[i + 1]);
+            idArr = argv[i + 1];
             i++;
         }
         if(strcmp(argv[i], "-tel") == 0){
@@ -70,13 +86,14 @@ int main(int argc, char *argv[]){
     }
 
     if(tel != NULL && ime != NULL && priimek != NULL && dan != NULL && mesec != NULL && leto != NULL){
-        
 
         off_t fsize = lseek(oprimek,0,SEEK_END);
         
         lseek(oprimek, 0, 0);
 
         int stevilo = 1;
+
+        idArr = toArray(1);
 
         uint8_t * buffer;
 
@@ -85,31 +102,47 @@ int main(int argc, char *argv[]){
             buffer = (uint8_t*)malloc(fsize);
             read(oprimek, buffer, fsize);
 
-            int i = 0;
-            stevilo = buffer[0];
+            int i = 1;
+            int pos;
+
             while(i < fsize){
                 if(buffer[i - 1] == ';') {
-                    stevilo = buffer[i];
+                    
+                    //stevilo = buffer[i];
+                    pos = i;
+                    int res = pos;
+
+                    for (; pos < res + 20; pos++)
+                    {
+                        idArr[res - i] = buffer[i];
+                    }
+                    
+                    i += 20;
+                    continue;
+
                 }
                 i++;
             }
+            
+
             free(buffer);
+
+
+            
+            sscanf(idArr, "%d", &stevilo);
+
             stevilo++;
+
+            idArr = toArray(stevilo);
         }
 
-        buffer = (uint8_t*)malloc(121 * sizeof(char) + sizeof(uint8_t));
 
-        buffer[0] = stevilo;
-
-        char* byte;
+        buffer = (uint8_t*)malloc(101 * sizeof(char));
 
         int index = 0;
-
         for (int i = 0; i < 20; i++){
-            if(tel[i] != '\0'){
-
-                buffer[i + 1] = tel[i];
-
+            if(idArr[i] != '\0'){
+                buffer[i] = idArr[i];
                 index++;
             }
             else{
@@ -117,16 +150,36 @@ int main(int argc, char *argv[]){
                 for (int j = index; j < 20; j++)
                 {
                     index++;
-                    buffer[j + 1] = '\0';
+                    buffer[j] = '\0';
                 }
                 break;
             }
         }
+
+        index = 20;
         int por = index;
+        for (int i = por; i < por + 20; i++){
+            if(tel[i - por] != '\0'){
+
+                buffer[i] = tel[i - por];
+
+                index++;
+            }
+            else{
+
+                for (int j = index; j < por + 20; j++)
+                {
+                    index++;
+                    buffer[j] = '\0';
+                }
+                break;
+            }
+        }
+        por = index;
         for (int i = por; i < por + 20; i++){
             if(ime[i - por] != '\0'){
 
-                buffer[i + 1] = ime[i - por];
+                buffer[i] = ime[i - por];
 
                 index++;
             }
@@ -134,7 +187,7 @@ int main(int argc, char *argv[]){
                 for (size_t j = index; j < por + 20; j++)
                 {
                     index++;
-                    buffer[j + 1] = '\0';
+                    buffer[j] = '\0';
                 }
                 break;
             }
@@ -143,7 +196,7 @@ int main(int argc, char *argv[]){
         for (int i = por; i < por + 20; i++){
             if(priimek[i - por] != '\0'){
 
-                buffer[i + 1] = priimek[i - por];
+                buffer[i] = priimek[i - por];
 
                 index++;
             }
@@ -151,7 +204,7 @@ int main(int argc, char *argv[]){
                 for (int j = index; j < por + 20; j++)
                 {
                     index++;
-                    buffer[j + 1] = '\0';
+                    buffer[j] = '\0';
                 }
                 break;
             }
@@ -161,24 +214,24 @@ int main(int argc, char *argv[]){
         for (int i = por; i < por + 20; i++){
             if(dan[i - por] != '\0'){
                 if(i == por){
-                    buffer[i + 1] = '0';
+                    buffer[i] = '0';
                     pad = dan[i - por];
                 }
                 else{
-                    buffer[i + 1] = dan[i - por];
-                    buffer[i] = pad;
+                    buffer[i] = dan[i - por];
+                    buffer[i - 1] = pad;
                 }
 
                 index++;
             }
             else {
                 if(por + 2 != index){
-                    buffer[i + 1] = pad;
+                    buffer[i] = pad;
                     index++;
                     
-                    buffer[i + 2] = '.';
+                    buffer[i + 1] = '.';
                 }
-                else buffer[i + 1] = '.';
+                else buffer[i] = '.';
                 index++;
                 break;
             }
@@ -187,44 +240,50 @@ int main(int argc, char *argv[]){
         for (int i = por; i < por + 20; i++){
             if(mesec[i - por] != '\0'){
                 if(i == por){
-                    buffer[i + 1] = '0';
+                    buffer[i] = '0';
                     pad = mesec[i - por];
                 }
                 else{
-                    buffer[i + 1] = mesec[i - por];
-                    buffer[i] = pad;
+                    buffer[i] = mesec[i - por];
+                    buffer[i - 1] = pad;
                 }
 
                 index++;
             }
             else {
                 if(por + 2 != index){
-                    buffer[i + 1] = pad;
+                    buffer[i] = pad;
                     index++;
                     
-                    buffer[i + 2] = '.';
+                    buffer[i + 1] = '.';
                 }
-                else buffer[i + 1] = '.';
+                else buffer[i] = '.';
                 index++;
                 break;
             }
         }
         por = index;
-        for (int i = por; i < por + 5; i++){
+        for (int i = por; i < por + 14; i++){
             if(leto[i - por] != '\0'){
 
-                buffer[i + 1] = leto[i - por];
+                buffer[i] = leto[i - por];
 
                 index++;
             }
-            else {
-                buffer[i + 1] = ';';
+            else{
+                for (int j = index; j < por + 14; j++)
+                {
+                    index++;
+                    i++;
+                    buffer[j] = '\0';
+                }
                 index++;
+                buffer[i] = ';';
                 break;
             }
         }
 
-        write(oprimek, buffer, index * sizeof(char) + sizeof(uint8_t));
+        write(oprimek, buffer, index * sizeof(char));
         
         free(buffer);
 
@@ -246,8 +305,24 @@ int main(int argc, char *argv[]){
                 if(branje[i] == ';'){
                     iskaniI--;
                     if(iskaniI == 1){
-                        int j = i + 2;
+                        int j = i + 1;
 
+                        char* tmp = toArray(id);
+
+                        for (int k = 0; k < 20; k++){
+                            if(idArr[k] != '\0'){
+                                branje[j] = tmp[k];
+                                j++;
+                            }
+                            else{
+                                for (int l = l; l < 20; l++)
+                                {
+                                    j++;
+                                    branje[j] = '\0';
+                                }
+                                break;
+                            }
+                        }
                         if(tel != NULL){
                             for (int k = 0; k < 20; k++){
                                 if(tel[k] != '\0'){
@@ -304,10 +379,6 @@ int main(int argc, char *argv[]){
                         if(dan != NULL){
                             for (int k = 0; k < 3; k++){
                                 if(dan[k] != '\0'){
-
-                                    printf("k: %d", k);
-
-                                    printf("j: %d", j);
 
                                     if(k == 0){
                                         branje[j] = '0';
@@ -384,7 +455,7 @@ int main(int argc, char *argv[]){
                             }
                         }
 
-                        j = j + 5;
+                        j = j + 15;
                         
                         write(oprimek, branje, fsize);
                         
@@ -408,7 +479,7 @@ int main(int argc, char *argv[]){
                 if(branje[i] == ';'){
                     iskaniI--;
                     if(iskaniI == 1){
-                        int j = i + 2;
+                        int j = i + 1;
                         while (branje[j] != ';'){
                             branje[j] = '\0';
                             j++;
@@ -434,16 +505,16 @@ int main(int argc, char *argv[]){
 
         while (loop < fsize - 1){
 
-            char* cur = malloc(72);
+            char* cur = malloc(101);
 
-            read(oprimek, cur, 72);
+            read(oprimek, cur, 101);
 
             int pos = 0;
             int k = 20;
 
             if(ime != NULL) {
                 k = strlen(ime);
-                for (int i = 21; i < 41; i++){
+                for (int i = 40; i < 60; i++){
                     if(ime[pos] == cur[i]) {
                         pos++;
                         if(pos == k) break;
@@ -454,10 +525,20 @@ int main(int argc, char *argv[]){
             }
 
             if(pos == k){
-                uint16_t beri = 1;
-                printf("%d\t", cur[0]);
+                uint16_t beri = 20;
+
+                char tmp[20];
+
+                for (int i = 0; i < 20; i++)
+                {
+                    tmp[i] = cur[i];
+                }
+                int stevilo = 0;
+                sscanf(tmp, "%d", &stevilo);
+
+                printf("%d\t", stevilo);
                 uint8_t tab = 20;
-                while(beri < 72){
+                while(beri < 100){
                     printf("%c", cur[beri]);
                     beri++;
                     tab--;
@@ -468,7 +549,7 @@ int main(int argc, char *argv[]){
                 }
                 printf("\n");
 
-                loop = loop + 72;
+                loop = loop + 101;
                 continue;
             }
 
@@ -477,7 +558,7 @@ int main(int argc, char *argv[]){
 
             if(priimek != NULL) {
                 k = strlen(priimek);
-                for (int i = 41; i < 61; i++){
+                for (int i = 60; i < 80; i++){
                     if(priimek[pos] == cur[i]) {
                         pos++;
                         if(pos == k) break;
@@ -487,10 +568,19 @@ int main(int argc, char *argv[]){
                 //izpisemo tega
             }
             if(pos == k){
-                uint16_t beri = 1;
-                printf("%d\t", cur[0]);
+                uint16_t beri = 20;
+                char tmp[20];
+
+                for (int i = 0; i < 20; i++)
+                {
+                    tmp[i] = cur[i];
+                }
+                int stevilo = 0;
+                sscanf(tmp, "%d", &stevilo);
+
+                printf("%d\t", stevilo);
                 uint8_t tab = 20;
-                while(beri < 72){
+                while(beri < 100){
                     printf("%c", cur[beri]);
                     beri++;
                     tab--;
@@ -501,17 +591,17 @@ int main(int argc, char *argv[]){
                 }
                 printf("\n");
 
-                loop = loop + 72;
+                loop = loop + 101;
                 continue;
             }
             free(cur);
 
-            loop = loop + 72;
+            loop = loop + 101;
         }
         
         
     }
-    else{
+    /*else{
         off_t fsize = lseek(oprimek, 0, SEEK_END);
 
         lseek(oprimek, 0, SEEK_SET);
@@ -525,15 +615,16 @@ int main(int argc, char *argv[]){
             printf("%d", branje[0]);
             while(i < fsize - 1){
                 if(branje[i] == ';'){
-                    printf(";%d", branje[i + 1]);
+                    printf("; %d", branje[i + 1]);
                     i += 2;
                     continue;
                 }
                 printf("%c", branje[i]);
                 i++;
             }
+            printf("%c", branje[i]);
             free(branje);
         }
-    }
+    }*/
     return 0;
 }
