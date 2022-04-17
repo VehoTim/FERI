@@ -39,6 +39,7 @@ namespace Vaja02
 
             Rectangle tocka1 = new Rectangle();
 
+            //izris tock enakomerno (random po celem kanvasu)
             if (rbEnakomerno.IsChecked == true)
             {
                 for (int i = 0; i < stTock; i++)
@@ -59,6 +60,7 @@ namespace Vaja02
                     canvas.Children.Add(tocka1);
                 }
             }
+            //izris tock po Gaussu (osredotoceno na sredino)
             else
             {
                 int mean1 = (int)canvas.ActualWidth / 2;
@@ -341,6 +343,7 @@ namespace Vaja02
             {
                 watch.Start();
 
+                // poiscemo max in min ekstrem
                 int E1 = 0, E2 = 0;
                 for (int i = 0; i < points.Count; i++)
                 {
@@ -354,6 +357,7 @@ namespace Vaja02
                     }
                 }
 
+                //imamo loceno na dve strani in jih posebej resujemo
                 QuickHull(points[E1], points[E2], 1);
                 QuickHull(points[E1], points[E2], -1);
 
@@ -364,6 +368,7 @@ namespace Vaja02
 
                 watch.Reset();
 
+                //izris dobljene konveksne lupine
                 for (int i = 0; i < obhodQH.Count; i++)
                 {
 
@@ -392,6 +397,7 @@ namespace Vaja02
 
         }
 
+        //funkcija za dolocitev strani glede na nase tocke
         int najdiStran(Point t1, Point t2, Point t3)
         {
             int val = (int)((t3.Y - t1.Y) * (t2.X - t1.X) - (t2.Y - t1.Y) * (t3.X - t1.X));
@@ -401,12 +407,14 @@ namespace Vaja02
             else return 0;
         }
 
+        //sem se bojo shranjevale tocke za obhod po quick hull
         List<Point> obhodQH = new List<Point>();
         void QuickHull(Point E1, Point E2, int stran)
         {
             int index = -1;
             int maxOddaljeno = 0;
-            // poiscemo najvecjo razdaljo od tocke do daljice, ki je na pravi strani daljice
+
+            //iscemo najbolj oddaljeno tocko na trenutni strani
             for (int i = 0; i < points.Count; i++)
             {
                 int tmp = Math.Abs((int)((points[i].Y - E1.Y) * (E2.X - E1.X) - 
@@ -419,7 +427,8 @@ namespace Vaja02
                 }
             }
 
-            // ce ne najdemo dobene damo zadni dve tocki v lupino
+            //ce ne najdemo novih bolj oddaljenih pomeni da smo nasli prave tocke
+            //koncamo rekurzijo
             if (index == -1)
             {
                 obhodQH.Add(E1);
@@ -427,7 +436,7 @@ namespace Vaja02
                 return;
             }
 
-            // Rekurzivno klice sama sebe 
+            //rekurzivno se premikamo po straneh
             QuickHull(points[index], E1, -najdiStran(points[index], E1, E2));
             QuickHull(points[index], E2, -najdiStran(points[index], E2, E1));
         }
