@@ -63,6 +63,8 @@ if __name__ == '__main__':
     plt.show()
 
     novSignal = dopler_efekt_mono(signal, 44100.0, 70, 50)
+
+    novSignal = np.fft.fft(novSignal)
     
     #sd.play(novSignal, 44100.0)
 

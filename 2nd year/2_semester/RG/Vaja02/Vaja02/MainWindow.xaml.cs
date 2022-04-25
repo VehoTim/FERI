@@ -37,13 +37,13 @@ namespace Vaja02
 
             Point pt = new Point();
 
-            Rectangle tocka1 = new Rectangle();
-
             //izris tock enakomerno (random po celem kanvasu)
             if (rbEnakomerno.IsChecked == true)
             {
                 for (int i = 0; i < stTock; i++)
                 {
+                    Rectangle tocka1 = new Rectangle();
+
                     pt.X = rnd.Next(0, (int)canvas.ActualWidth);
                     pt.Y = rnd.Next(0, (int)canvas.ActualHeight);
 
@@ -69,6 +69,7 @@ namespace Vaja02
 
                 for (int i = 0; i < stTock; i++)
                 {
+                    Rectangle tocka1 = new Rectangle();
 
                     double u1x = 1.0 - rnd.NextDouble();
                     double u2x = 1.0 - rnd.NextDouble();
