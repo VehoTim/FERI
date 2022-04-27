@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include "skrivna_funkcija.h"
 
 
 int main () {
-	int i = 0;
+	int lokalna_premenljivka = 0;
+	
+	lokalna_premenljivka = skrivna_funkcija();
 		
 	return 0;
 }

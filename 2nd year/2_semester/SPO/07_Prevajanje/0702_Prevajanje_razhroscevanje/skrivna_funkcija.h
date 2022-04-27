@@ -1,0 +1,1 @@
+int skrivna_funkcija();

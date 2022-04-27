@@ -8,7 +8,9 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <errno.h>
+#include <stdint.h>
 
+//funkcija za preverjanje ali je file ali folder
 int is_regular_file(const char *path)
 {
     struct stat path_stat;
@@ -22,7 +24,7 @@ int main(int argc, char *argv[]) {
     char* datoteka = argv[3];
 
     uint32_t metapodatki;
-    uint32_t dolzinaImena = sizeof(datoteka) + 1;
+    uint32_t dolzinaImena = strlen(datoteka) + 1;
 
     //printf("%d\n", dolzinaImena);
 
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]) {
             velikostZbirke = 0;
         }
     } else {
-        printf("File ni najden");
+        printf("SPODLETEL\tNI NAJDENO\t%s\t-\n", datoteka);
     }
 
     char podatki[velikostZbirke];
@@ -55,14 +57,11 @@ int main(int argc, char *argv[]) {
         fp = fopen ( datoteka , "rb" );
         if( !fp ) perror(datoteka),exit(1);
 
-        /* allocate memory for entire content */
         buffer = calloc( 1, velikostZbirke+1 );
         if( !buffer ) fclose(fp),fputs("memory alloc fails",stderr),exit(1);
 
-        /* copy the file into the buffer */
         if( 1!=fread( buffer , velikostZbirke, 1 , fp) )
         fclose(fp),free(buffer),fputs("entire read fails",stderr),exit(1);
-
         
         for(int i = 0; i < velikostZbirke; i++){
             hash += buffer[i];
@@ -73,11 +72,6 @@ int main(int argc, char *argv[]) {
         free(buffer);
     }
 
-    
-
-
-
-
     char ime[dolzinaImena];
     for(int i = 0; i < dolzinaImena; i++){
         ime[i] = datoteka[i];
@@ -85,8 +79,6 @@ int main(int argc, char *argv[]) {
             ime[i + 1] = '\0';
         }
     }
-
-    
 
     //printf("%d", hash);
 
@@ -104,7 +96,7 @@ int main(int argc, char *argv[]) {
 	}
 
 
-    if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         exit(1);
     }
 
@@ -114,17 +106,25 @@ int main(int argc, char *argv[]) {
 	memset(&(their_addr.sin_zero), '\0', 8);
 	
 	if (connect(sockfd, (struct sockaddr *)&their_addr, sizeof(struct sockaddr)) == -1) {
-		perror("connect");
+		//perror("connect");
+
+        if(metapodatki == 2147483648){
+            printf("SPODLETEL\tZBIRKA\t%s\t%d\n", datoteka, velikostZbirke);
+        }
+        else if(metapodatki == 1073741824){
+            printf("SPODLETEL\tIMENIK\t%s\t%d\n", datoteka, velikostZbirke);
+        }
+
         exit(1);
 	}
 
     int velikost = 4 * sizeof(uint32_t) + velikostZbirke + dolzinaImena;
     char struktura[velikost];
 
-    struktura[0] = metapodatki;
-    struktura[4] = dolzinaImena;
-    struktura[8] = velikostZbirke;
-    struktura[12] = hash;
+    *(uint32_t *)&struktura[0] = metapodatki;
+    *(uint32_t *)&struktura[4] = dolzinaImena;
+    *(uint32_t *)&struktura[8] = velikostZbirke;
+    *(uint32_t *)&struktura[12] = hash;
     
     for(int i = 0; i < dolzinaImena; i++){
         struktura[i + 16] = ime[i];
@@ -133,14 +133,23 @@ int main(int argc, char *argv[]) {
         struktura[i + 16 + dolzinaImena] = podatki[i];
     }
 
-    int sent = 0;
+    int posiljanje = write(sockfd, struktura, velikost);
 
-    //posiljanje
-    if(sent = send(sockfd, struktura, velikost, 0) < 0) {
-        perror("send");
+    if(posiljanje < 0){
+        if(metapodatki == 2147483648){
+            printf("SPODLETEL\tZBIRKA\t%s\t%d\n", datoteka, velikostZbirke);
+        }
+        else if(metapodatki == 1073741824){
+            printf("SPODLETEL\tIMENIK\t%s\t%d\n", datoteka, velikostZbirke);
+        }
     }
-    else printf("%d", sent);
-
 	
     close(sockfd);
+
+    if(metapodatki == 2147483648){
+        printf("USPEL\tZBIRKA\t%s\t%d\n", datoteka, velikostZbirke);
+    }
+    else if(metapodatki == 1073741824){
+        printf("USPEL\tIMENIK\t%s\t%d\n", datoteka, velikostZbirke);
+    }
 }
