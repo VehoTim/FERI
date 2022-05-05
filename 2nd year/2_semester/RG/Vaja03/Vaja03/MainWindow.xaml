@@ -19,8 +19,8 @@
         </GroupBox>
         <GroupBox Header="GroupBox" Margin="0,0,10,29" HorizontalAlignment="Right" Width="211" Height="323" VerticalAlignment="Bottom">
             <Grid>
-                <RadioButton x:Name="rbMinUtez" Content="Jarvisov obhod" HorizontalAlignment="Left" IsChecked="True" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <RadioButton x:Name="rbHamilton" Content="Grahamovo prebiranje" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rbMinUtez" Content="Minimalna utezena triangulacija" HorizontalAlignment="Left" IsChecked="True" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <RadioButton x:Name="rbHamilton" Content="Hamiltonova triangulacija" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
                 <Button x:Name="btnStart" Content="Start" HorizontalAlignment="Left" Margin="126,270,0,0" VerticalAlignment="Top" Width="63" Click="btnStart_Click"/>
 
             </Grid>
