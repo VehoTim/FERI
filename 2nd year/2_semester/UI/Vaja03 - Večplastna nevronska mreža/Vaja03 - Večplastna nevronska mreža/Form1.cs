@@ -106,10 +106,7 @@ namespace Vaja03___Večplastna_nevronska_mreža
 
                         tmp[i] = zacasna;
                         tmp.RemoveAt(i+1);
-                        if (tmp.Count <= N + 1)
-                        {
-                            break;
-                        }
+                        if (tmp.Count <= N + 1) break;
                     }
                 } while (tmp.Count > N + 1);
 

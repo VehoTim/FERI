@@ -1,100 +1,116 @@
 import numpy as np
-from scipy import signal as sig
-import math
 from scipy.io import wavfile
-    
-DTMF = np.array([["1", "2", "3"], 
-                ["4", "5", "6"], 
-                ["7", "8", "9"], 
-                ["*", "0", "#"]])
 
-def najdi_vrednost(vec, vrednost):
-    index = np.searchsorted(vec, vrednost, side="left")
-    if index > 0 and (index == len(vec) or math.fabs(vrednost - vec[index-1]) < math.fabs(vrednost - vec[index])):
-        return index-1
-    else:
-        return index
+#DTMF tabela za razpoznavanje znakov
+DTMF = {(697, 1209): "1", 
+        (697, 1336): "2", 
+        (697, 1477): "3", 
+        (770, 1209): "4", 
+        (770, 1336): "5", 
+        (770, 1477): "6", 
+        (852, 1209): "7", 
+        (852, 1336): "8", 
+        (852, 1477): "9", 
+        (941, 1209): "*", 
+        (941, 1336): "0", 
+        (941, 1477): "#"}
 
 def analiziraj_dtmf(signal, vzorcevalna_frekvenca, min_cas_ton, min_cas_pavza):
 
-    vec = []
-    vektor = []
-    dolzina_tona = 0
-    dolzina_pavze = 0
-    st_tonov = []
-    st_pavz = []
+    vec = ""
 
-    velikost_okna = ((int)(2**(int((vzorcevalna_frekvenca*(min_cas_ton/4))*0.001)-1))).bit_length()
+    #vzorcevalna frekvenca na sekundo * koliko sekund rabimo minimalno = min tonov
+    min_tonov = (int)((vzorcevalna_frekvenca * min_cas_ton) / 1000)
+    #vzorcevalna frekvenca na sekundo * koliko sekund pavze minimalno = min pavza
+    min_pavze = (int)((vzorcevalna_frekvenca * min_cas_pavza) / 1000)
 
+    trenZnak = ""
+    #prejsnja = ""
+    
+    #loopamo skozi signal
+    for i in range(0, len(signal), min_tonov):
 
-    f, t, TFD = sig.spectrogram(signal, vzorcevalna_frekvenca, window=sig.windows.hamming(velikost_okna), nperseg=abs(velikost_okna), noverlap=int(velikost_okna*0.8))
+        #na i do i + min_tonov izvedemo fft ter pridobimo frekvenco
+        sigFFT = np.fft.fft(signal[i:i+min_tonov])
+        frekv = np.fft.fftfreq(signal[i:i+min_tonov].size, 1 / vzorcevalna_frekvenca)
 
-    najdene = np.array([najdi_vrednost(f, 697),
-                        najdi_vrednost(f, 770),
-                        najdi_vrednost(f, 852),
-                        najdi_vrednost(f, 941),
-                        najdi_vrednost(f, 1209),
-                        najdi_vrednost(f, 1336),
-                        najdi_vrednost(f, 1477)])
-                            
-    pomembne = TFD[najdene,0:]
-    spodnja = pomembne[0:4,0:]
-    zgornja = pomembne[4:,0:]
+        #poiscemo nizke frekvence
+        spodnjaMin = np.where(frekv > 600)[0][0]
+        spodnjaMax = np.where(frekv > 1000)[0][0]
 
-    prestop = t[1] - t[0]
+        freq = frekv[spodnjaMin:spodnjaMax]
+        amp = abs(sigFFT.real[spodnjaMin:spodnjaMax])
 
-    povprecje = np.average(pomembne) * 0.75
-    pomembne[pomembne < povprecje] = np.nan
+        #najdena spodnja frekvenca
+        spodnja = freq[np.where(amp == max(amp))[0][0]]
 
-    povprecje = np.nanmean(pomembne) * 0.4
-    pomembne[np.isnan(pomembne)] = 0
-    pomembne[pomembne < povprecje] = 0
+        #maksimalni odmik tona
+        odmik = 10
+        trenNaj = 0
 
-    for i in range(t.size):
-        i_spodnje = spodnja[0:,i].argmax()
-        i_zgornje = zgornja[0:,i].argmax()
+        #loopamo skozi vse nizke frekv. in jih primerjamo z naso
+        for f in [697, 770, 852, 941] :
+            #ce ima boljsi odmik jo shranimo
+            if abs(spodnja-f) < odmik :
+                odmik = abs(spodnja-f)
+                trenNaj = f
+        #najdena spodnja
+        spodnja = trenNaj
+        
+        #poiscemo visoke frekvence
+        zgornjaMin = np.where(frekv > 1100)[0][0]
+        zgornjaMax = np.where(frekv > 1500)[0][0]
 
-        if(np.amax(spodnja[0:,i]) != 0 or np.amax(zgornja[0:,i]) != 0):
+        freq = frekv[zgornjaMin:zgornjaMax]
+        amp = abs(sigFFT.real[zgornjaMin:zgornjaMax])
 
-            vektor.append(DTMF[i_spodnje,i_zgornje])
-            dolzina_tona += prestop
+        #najdena zgornja frekvenca
+        zgornja = freq[np.where(amp == max(amp))[0][0]]
 
-            if(i == t.size-1):
-                break
+        #maksimalni odmik tona
+        odmik = 10
+        trenNaj = 0
 
-            if(np.amax(spodnja[0:,i+1]) == 0 and np.amax(zgornja[0:,i+1]) == 0):
-                c = max(set(vektor), key=vektor.count)
-                vec.append(c)
-                vektor.clear()
-                st_tonov.append(dolzina_tona)
-                dolzina_tona = prestop
-        else:
-            dolzina_pavze += prestop
+        #loopamo skozi vse visoke frekv. in jih primerjamo z naso
+        for f in [1209, 1336, 1477] :
+            #ce je boljsa jo shranimo
+            if abs(zgornja-f) < odmik :
+                odmik = abs(zgornja-f) 
+                trenNaj = f
+        #najdena zgornja
+        zgornja = trenNaj
+        
+        #ce sta prazni samo ponastavimo trenZnak
+        if spodnja == 0 or zgornja == 0:
+            #prejsnja = trenZnak
+            trenZnak = ""
+        #ce pa se ni bila na trenZnaku jo dodamo
+        elif DTMF[(spodnja,zgornja)] != trenZnak:
+            #if trenZnak != prejsnja: continue
+            #prejsnja = trenZnak
+            trenZnak = DTMF[(spodnja,zgornja)]
+            vec += trenZnak
 
-            if(i == t.size-1):
-                break
+    #nas vec spremenimo v vektor da ga bomo vrnili
+    vektor = np.chararray((len(vec), 1))
 
-            if(np.amax(spodnja[0:,i+1]) != 0 or np.amax(zgornja[0:,i+1]) != 0):
-                st_pavz.append(dolzina_pavze)
-                dolzina_pavze = prestop
+    #vstavljamo v vektor
+    pos = 0
+    for c in vec:
+        vektor[pos] = c
+        pos += 1
 
-    min_cas_pavza = min_cas_pavza*0.0009
-    min_cas_ton = min_cas_ton*0.0009
+    return vektor.decode("utf-8")
 
-    i = 0
-    n = len(vec)-1
-    for c in vec[:]:
-        if(i == n and st_tonov[i] >= min_cas_ton):
-            continue
-        if(st_tonov[i] < min_cas_ton or st_pavz[i] < min_cas_pavza):
-            vec.remove(c)
-        i += 1
-
-    return (np.array(vec, dtype="<U1")).reshape([-1,1])
 
 if __name__ == '__main__':
     print("Modul za DTMF analizo!")
-    Fvz, signal = wavfile.read("dtmf_123456789_0__min_pulse_0.1_min_pause_0.1.wav")
-    vec = analiziraj_dtmf(signal, Fvz, 100, 100) # v ms podano
+    
+    Fvz, sig = wavfile.read('dtmf_123456789_0__min_pulse_0.1_min_pause_0.1.wav')
+    #Fvz, sig = wavfile.read('dtmf_124679_min_pulse_0.1_min_pause_0.1.wav')
+    #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_low.wav')
+    #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_med.wav')
+    #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_high.wav')
+    vec = analiziraj_dtmf(sig,Fvz, 100, 100)
 
     print(vec)
