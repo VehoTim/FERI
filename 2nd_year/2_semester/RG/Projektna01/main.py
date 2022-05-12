@@ -101,7 +101,6 @@ def izracun4plustocke(tocka1, tocka2, tocka3, tocka4):
     c = np.dot((np.subtract(P4, P1)), Zn)
 
 
-    
     X = ((tocka1[3] * tocka1[3]) - (tocka2[3] * tocka2[3]) + (d * d)) / (2 * d)
     Y = ((tocka1[3] * tocka1[3]) - (tocka3[3] * tocka3[3]) + (i * i) + (j * j)) / (2 * j) - (i / j) * X
     Z = ((tocka1[3] * tocka1[3]) - (tocka4[3] * tocka4[3]) + (a * a) + (b * b) + (c * c)) / (2 * c) - (a / c) * X - (b / c) * Y
@@ -223,7 +222,8 @@ if __name__ == '__main__':
 
         rezultati = []
 
-        skupaj = np.zeros(3)
+        arr = [0.0, 0.0, 0.0]
+        skupaj = np.array(arr)
 
         for i in range(st):
             a = random.sample(range(0, st-1), 4)
@@ -244,6 +244,4 @@ if __name__ == '__main__':
 
         rmse = math.sqrt(racRMSE.mean())
         print("RMSE: ", str(rmse))
-
-        #koncaj to
                    
