@@ -1,9 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as pyplot
 
+#dela
+
 #import cv2
 
-#ta dela isto kot funkcija v cv2
+##ta dela isto kot funkcija v cv2
 def RGB_v_HSV(slika):
 
     tmp = np.copy(slika)
@@ -116,16 +118,19 @@ def RGB_v_YCbCr(slika):
 
 def YCbCr_v_RGB(slika):
 
-    '''
     tmp = np.copy(slika)
     #tmp = slika.astype(np.float64)
     #tmp[:,:,[1,2]] -= 128
     
     for x in range(tmp.shape[0]):
         for y in range(tmp.shape[1]):
-            R_ = tmp[x][y][0] + 1.402 * (tmp[x][y][2] - 128)
-            G_ = tmp[x][y][0] - 0.344136 * (tmp[x][y][1] - 128) - 0.714136 * (tmp[x][y][2] - 128)
-            B_ = tmp[x][y][0] + 1.772  * (tmp[x][y][1] - 128)
+            #R_ = tmp[x][y][0] + 1.402 * (tmp[x][y][2] - 128)
+            #G_ = tmp[x][y][0] - 0.344136 * (tmp[x][y][1] - 128) - 0.714136 * (tmp[x][y][2] - 128)
+            #B_ = tmp[x][y][0] + 1.772  * (tmp[x][y][1] - 128)
+
+            R_ = min(max(0, round(tmp[x][y][0] + 1.402 * (tmp[x][y][2] - 128))), 255)
+            G_ = min(max(0, round(tmp[x][y][0] - 0.3441 * (tmp[x][y][1] - 128) - 0.7141 * (tmp[x][y][2] - 128))), 255)
+            B_ = min(max(0, round(tmp[x][y][0] + 1.772  * (tmp[x][y][1] - 128))), 255)
 
             tmp[x][y][0] = R_
             tmp[x][y][1] = G_
@@ -141,6 +146,7 @@ def YCbCr_v_RGB(slika):
     np.putmask(rgb, rgb > 255, 255)
     np.putmask(rgb, rgb < 0, 0)
     return np.uint8(rgb)
+    '''
 
 if __name__ == '__main__':
     print("Modul za pretvorbo barvnih prostorov!")
@@ -156,7 +162,6 @@ if __name__ == '__main__':
     #pyplot.figure()
     #pyplot.imshow(img)
 
-    '''
     slikaHSV = RGB_v_HSV(slika)
 
     pyplot.figure()
@@ -184,7 +189,6 @@ if __name__ == '__main__':
     pyplot.show()
 
 
-    '''
 
     img = cv2.cvtColor(slika, cv2.COLOR_RGB2YCR_CB)
     
