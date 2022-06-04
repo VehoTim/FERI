@@ -41,9 +41,9 @@ def decimiraj_sliko(slika, faktor, filter, gauss_sigma=None):
 if __name__ == '__main__':
     print("Modul za skaliranje slike!")
 
-    slika = pyplot.imread('./0701_pretvorbe_barvnih_prostorov/slike/sea-breeze-apartments-pool.jpg')
+    slika = pyplot.imread('./0701_pretvorbe_barvnih_prostorov/slike/lenna.jpg')
     #slika = pyplot.imread('sea-breeze-apartments-pool.jpg')
-    novaSlika = decimiraj_sliko(slika, 9, "gauss")
+    novaSlika = decimiraj_sliko(slika, 6, "gauss")
 
     print(novaSlika.shape)
 

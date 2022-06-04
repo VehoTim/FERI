@@ -106,11 +106,11 @@ def analiziraj_dtmf(signal, vzorcevalna_frekvenca, min_cas_ton, min_cas_pavza):
 if __name__ == '__main__':
     print("Modul za DTMF analizo!")
     
-    Fvz, sig = wavfile.read('dtmf_123456789_0__min_pulse_0.1_min_pause_0.1.wav')
+    #Fvz, sig = wavfile.read('dtmf_123456789_0__min_pulse_0.1_min_pause_0.1.wav')
     #Fvz, sig = wavfile.read('dtmf_124679_min_pulse_0.1_min_pause_0.1.wav')
     #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_low.wav')
     #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_med.wav')
-    #Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_high.wav')
-    vec = analiziraj_dtmf(sig,Fvz, 100, 100)
+    Fvz, sig = wavfile.read('dtmf_123_min_pulse_0.2_min_pause_0.1_noise_high.wav')
+    vec = analiziraj_dtmf(sig,Fvz, 200, 100)
 
     print(vec)

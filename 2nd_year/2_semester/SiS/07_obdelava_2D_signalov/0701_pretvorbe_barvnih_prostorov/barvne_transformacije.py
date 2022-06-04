@@ -153,6 +153,7 @@ if __name__ == '__main__':
 
     slika = pyplot.imread('slike/sea-breeze-apartments-pool.jpg')
 
+    print(slika.dtype)
 
 
 
